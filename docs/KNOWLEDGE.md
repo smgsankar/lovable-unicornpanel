@@ -27,6 +27,7 @@ Use `federation` plugin from `@module-federation/vite` to setup module federatio
     react: { singleton: true },
     "react-dom": { singleton: true },
     "react-router-dom": { singleton: true },
+    antd: { singleton: true },
   }
 }
 ```
