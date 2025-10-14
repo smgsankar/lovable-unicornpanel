@@ -91,7 +91,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
         onCollapse={setCollapsed}
         trigger={null}
         className={styles.sider}
-        width={200}
+        width={230}
       >
         {!collapsed && (
           <div className={styles.logoContainer}>
