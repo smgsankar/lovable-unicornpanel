@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Button, Input, Table, Space } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { fetch } from '../../apiClient';
-import styles from './SellerListScreen.module.css';
 
 interface Seller {
   id: number;
@@ -17,6 +16,38 @@ interface ListResponse {
   message: string;
   data: Seller[];
 }
+
+const styles: Record<string, React.CSSProperties> = {
+  container: {
+    padding: '24px',
+  },
+  header: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: '24px',
+  },
+  heading: {
+    fontSize: '24px',
+    fontWeight: 600,
+    color: '#1A1A1A',
+    margin: 0,
+  },
+  subHeading: {
+    fontSize: '16px',
+    color: '#4D4D4D',
+    margin: '4px 0 0 0',
+  },
+  filters: {
+    display: 'flex',
+    gap: '12px',
+    marginBottom: '24px',
+    alignItems: 'center',
+  },
+  filterInput: {
+    width: '200px',
+  },
+};
 
 const SellerListScreen = () => {
   const history = useHistory();
@@ -135,43 +166,43 @@ const SellerListScreen = () => {
   ];
 
   return (
-    <div className={styles.container}>
-      <div className={styles.header}>
+    <div style={styles.container}>
+      <div style={styles.header}>
         <div>
-          <h1 className={styles.heading}>Sellers</h1>
-          <p className={styles.subHeading}>List of all sellers associated to the warehouse</p>
+          <h1 style={styles.heading}>Sellers</h1>
+          <p style={styles.subHeading}>List of all sellers associated to the warehouse</p>
         </div>
         <Button type="primary" onClick={() => history.push('create')}>
           Create Seller
         </Button>
       </div>
 
-      <div className={styles.filters}>
+      <div style={styles.filters}>
         <Input
           placeholder="Seller ID"
           type="number"
           value={filters.id}
           onChange={(e) => setFilters({ ...filters, id: e.target.value })}
-          className={styles.filterInput}
+          style={styles.filterInput}
         />
         <Input
           placeholder="Seller Name"
           value={filters.name}
           onChange={(e) => setFilters({ ...filters, name: e.target.value })}
-          className={styles.filterInput}
+          style={styles.filterInput}
         />
         <Input
           placeholder="Shop Name"
           value={filters.shop_name}
           onChange={(e) => setFilters({ ...filters, shop_name: e.target.value })}
-          className={styles.filterInput}
+          style={styles.filterInput}
         />
         <Input
           placeholder="Phone"
           type="number"
           value={filters.phone}
           onChange={(e) => setFilters({ ...filters, phone: e.target.value })}
-          className={styles.filterInput}
+          style={styles.filterInput}
         />
         <Space>
           <Button type="link" onClick={handleApplyFilters}>

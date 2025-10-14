@@ -3,7 +3,6 @@ import { Form, Input, Button, Upload, message } from 'antd';
 import { ArrowLeftOutlined, UploadOutlined } from '@ant-design/icons';
 import { useHistory, useLocation } from 'react-router-dom';
 import { fetch, uploadFileToGcs } from '../../apiClient';
-import styles from './SellerFormScreen.module.css';
 
 const { TextArea } = Input;
 
@@ -15,6 +14,54 @@ interface SellerData {
   phone: string;
   verification_document_gcs_path?: string;
 }
+
+const styles: Record<string, React.CSSProperties> = {
+  container: {
+    padding: '24px',
+  },
+  header: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '12px',
+    marginBottom: '24px',
+  },
+  backButton: {
+    padding: '4px',
+    color: '#4D4D4D',
+  },
+  heading: {
+    fontSize: '24px',
+    fontWeight: 600,
+    color: '#1A1A1A',
+    margin: 0,
+  },
+  section: {
+    background: '#FFFFFF',
+    borderRadius: '4px',
+    padding: '24px',
+    marginBottom: '24px',
+  },
+  sectionTitle: {
+    fontSize: '18px',
+    fontWeight: 600,
+    color: '#1A1A1A',
+    margin: '0 0 16px 0',
+  },
+  divider: {
+    height: '1px',
+    background: '#E6E6E6',
+    marginBottom: '24px',
+  },
+  sectionContent: {
+    display: 'grid',
+    gap: '16px',
+  },
+  actions: {
+    display: 'flex',
+    gap: '12px',
+    justifyContent: 'flex-end',
+  },
+};
 
 const SellerFormScreen = () => {
   const history = useHistory();
@@ -138,24 +185,24 @@ const SellerFormScreen = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.header}>
+    <div style={styles.container}>
+      <div style={styles.header}>
         <Button
           type="text"
           icon={<ArrowLeftOutlined />}
           onClick={() => history.goBack()}
-          className={styles.backButton}
+          style={styles.backButton}
         />
-        <h1 className={styles.heading}>
+        <h1 style={styles.heading}>
           {isEdit ? `Edit seller - ${sellerId}` : 'Create Seller'}
         </h1>
       </div>
 
       <Form form={form} layout="vertical" onFinish={handleSubmit}>
-        <div className={styles.section}>
-          <h2 className={styles.sectionTitle}>Seller details</h2>
-          <div className={styles.divider} />
-          <div className={styles.sectionContent}>
+        <div style={styles.section}>
+          <h2 style={styles.sectionTitle}>Seller details</h2>
+          <div style={styles.divider} />
+          <div style={styles.sectionContent}>
             <Form.Item
               name="name"
               label="Seller Name"
@@ -202,10 +249,10 @@ const SellerFormScreen = () => {
           </div>
         </div>
 
-        <div className={styles.section}>
-          <h2 className={styles.sectionTitle}>Supporting documents</h2>
-          <div className={styles.divider} />
-          <div className={styles.sectionContent}>
+        <div style={styles.section}>
+          <h2 style={styles.sectionTitle}>Supporting documents</h2>
+          <div style={styles.divider} />
+          <div style={styles.sectionContent}>
             <Form.Item
               name="verification_document"
               label="Verification Document"
@@ -218,7 +265,7 @@ const SellerFormScreen = () => {
           </div>
         </div>
 
-        <div className={styles.actions}>
+        <div style={styles.actions}>
           <Button onClick={() => history.goBack()}>Cancel</Button>
           <Button type="primary" htmlType="submit" loading={loading}>
             {isEdit ? 'Update Seller' : 'Create Seller'}

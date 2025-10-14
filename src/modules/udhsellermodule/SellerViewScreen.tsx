@@ -3,7 +3,6 @@ import { Button, Descriptions, message } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { useHistory, useLocation } from 'react-router-dom';
 import { fetch, getGcsDownloadUrl } from '../../apiClient';
-import styles from './SellerViewScreen.module.css';
 
 interface SellerData {
   id: number;
@@ -13,6 +12,51 @@ interface SellerData {
   phone: string;
   verification_document_gcs_path?: string;
 }
+
+const styles: Record<string, React.CSSProperties> = {
+  container: {
+    padding: '24px',
+  },
+  header: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '12px',
+    marginBottom: '24px',
+  },
+  backButton: {
+    padding: '4px',
+    color: '#4D4D4D',
+  },
+  heading: {
+    fontSize: '24px',
+    fontWeight: 600,
+    color: '#1A1A1A',
+    margin: 0,
+  },
+  section: {
+    background: '#FFFFFF',
+    borderRadius: '4px',
+    padding: '24px',
+  },
+  sectionTitle: {
+    fontSize: '18px',
+    fontWeight: 600,
+    color: '#1A1A1A',
+    margin: '0 0 16px 0',
+  },
+  divider: {
+    height: '1px',
+    background: '#E6E6E6',
+    marginBottom: '24px',
+  },
+  sectionContent: {
+    display: 'grid',
+    gap: '16px',
+  },
+  linkButton: {
+    padding: 0,
+  },
+};
 
 const SellerViewScreen = () => {
   const history = useHistory();
@@ -73,21 +117,21 @@ const SellerViewScreen = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.header}>
+    <div style={styles.container}>
+      <div style={styles.header}>
         <Button
           type="text"
           icon={<ArrowLeftOutlined />}
           onClick={() => history.goBack()}
-          className={styles.backButton}
+          style={styles.backButton}
         />
-        <h1 className={styles.heading}>View seller - {sellerId}</h1>
+        <h1 style={styles.heading}>View seller - {sellerId}</h1>
       </div>
 
-      <div className={styles.section}>
-        <h2 className={styles.sectionTitle}>Seller details</h2>
-        <div className={styles.divider} />
-        <div className={styles.sectionContent}>
+      <div style={styles.section}>
+        <h2 style={styles.sectionTitle}>Seller details</h2>
+        <div style={styles.divider} />
+        <div style={styles.sectionContent}>
           {seller && (
             <Descriptions column={1} bordered>
               <Descriptions.Item label="Seller ID">{seller.id}</Descriptions.Item>
@@ -97,7 +141,7 @@ const SellerViewScreen = () => {
               <Descriptions.Item label="Shop Address">{seller.shop_address}</Descriptions.Item>
               {seller.verification_document_gcs_path && (
                 <Descriptions.Item label="Verification Document">
-                  <Button type="link" onClick={handleDocumentClick} className={styles.linkButton}>
+                  <Button type="link" onClick={handleDocumentClick} style={styles.linkButton}>
                     View Document
                   </Button>
                 </Descriptions.Item>
