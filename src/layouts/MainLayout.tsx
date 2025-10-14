@@ -93,9 +93,11 @@ const MainLayout = ({ children }: MainLayoutProps) => {
         className={styles.sider}
         width={250}
       >
-        <div className={styles.logoContainer}>
-          <img src={logo} alt="Unicorn" className={styles.logo} />
-        </div>
+        {!collapsed && (
+          <div className={styles.logoContainer}>
+            <img src={logo} alt="Unicorn" className={styles.logo} />
+          </div>
+        )}
 
         <div className={styles.toggleButton} onClick={() => setCollapsed(!collapsed)}>
           {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
