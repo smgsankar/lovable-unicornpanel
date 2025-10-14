@@ -1,27 +1,37 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { ConfigProvider } from 'antd';
+import MainLayout from './layouts/MainLayout';
+import BlankScreen from './pages/BlankScreen';
+import LovableHome from './pages/LovableHome';
+import NotFound from './pages/NotFound';
+import './App.css';
 
-const queryClient = new QueryClient();
-
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  return (
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: '#45469D',
+          colorError: '#F94949',
+          colorBgContainer: '#FFFFFF',
+          colorBgLayout: '#F6F6F6',
+          colorText: '#4D4D4D',
+          colorTextHeading: '#1A1A1A',
+          borderRadius: 4,
+        },
+      }}
+    >
+      <Router>
+        <MainLayout>
+          <Switch>
+            <Route exact path="/" component={BlankScreen} />
+            <Route exact path="/lovablehomemodule/home" component={LovableHome} />
+            <Route path="*" component={NotFound} />
+          </Switch>
+        </MainLayout>
+      </Router>
+    </ConfigProvider>
+  );
+};
 
 export default App;
