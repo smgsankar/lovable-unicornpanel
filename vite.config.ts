@@ -17,7 +17,9 @@ export default defineConfig(({ mode }) => ({
       name: "lovableunicornpanel",
       filename: "remoteModules.js",
       manifest: true,
-      exposes: {},
+      exposes: {
+        'lovablehomemoduleComponents': './src/modules/lovablehomemodule/index.ts',
+      },
       shared: {
         react: { singleton: true },
         "react-dom": { singleton: true },

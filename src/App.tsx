@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 import MainLayout from './layouts/MainLayout';
 import BlankScreen from './pages/BlankScreen';
-import LovableHome from './pages/LovableHome';
+import { HomeScreen } from './modules/lovablehomemodule';
 import NotFound from './pages/NotFound';
 import './App.css';
 
@@ -25,7 +25,7 @@ const App = () => {
         <MainLayout>
           <Switch>
             <Route exact path="/" component={BlankScreen} />
-            <Route exact path="/lovablehomemodule/home" component={LovableHome} />
+            <Route exact path="/lovablehomemodule/home" component={HomeScreen} />
             <Route path="*" component={NotFound} />
           </Switch>
         </MainLayout>

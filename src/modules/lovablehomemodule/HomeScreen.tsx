@@ -1,6 +1,6 @@
-import styles from './LovableHome.module.css';
+import styles from './HomeScreen.module.css';
 
-const LovableHome = () => {
+const HomeScreen = () => {
   return (
     <div className={styles.container}>
       <h1 className={styles.heading}>Welcome to Lovable Admin Panel</h1>
@@ -25,4 +25,4 @@ const LovableHome = () => {
   );
 };
 
-export default LovableHome;
+export default HomeScreen;
