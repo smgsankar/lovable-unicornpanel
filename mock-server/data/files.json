@@ -1,0 +1,10 @@
+[
+  {
+    "gcs_path": "/sc3_admin/data/image1.png",
+    "download_url": "/sc3_admin/data/image1.png"
+  },
+  {
+    "gcs_path": "/sc3_admin/data/image2.jpg",
+    "download_url": "/sc3_admin/data/image2.jpg"
+  }
+]

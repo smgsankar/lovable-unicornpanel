@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "name": "Seller ABC",
+    "shop_name": "Shop ABC",
+    "shop_address": "123, Market St, Cityville",
+    "phone": "8801712345678",
+    "verification_document_gcs_path": "/documents/verification_doc_1.pdf"
+  },
+  {
+    "id": 2,
+    "name": "Seller XYZ",
+    "shop_name": "Shop XYZ",
+    "shop_address": "456, Commerce Ave, Townsville",
+    "phone": "8801987654321",
+    "verification_document_gcs_path": "/documents/verification_doc_2.pdf"
+  },
+  {
+    "id": 3,
+    "name": "Seller PQR",
+    "shop_name": "Shop PQR",
+    "shop_address": "789, Trade Center, Marketville",
+    "phone": "8801555666777",
+    "verification_document_gcs_path": "/documents/verification_doc_3.pdf"
+  },
+  {
+    "id": 4,
+    "name": "Seller MNO",
+    "shop_name": "Shop MNO",
+    "shop_address": "321, Retail Plaza, Shoptown",
+    "phone": "8801444333222",
+    "verification_document_gcs_path": "/documents/verification_doc_4.pdf"
+  }
+]
