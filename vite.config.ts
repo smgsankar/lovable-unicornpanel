@@ -30,4 +30,9 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    target: "ES2022",
+    minify: false,
+    cssCodeSplit: false,
+  },
 }));
