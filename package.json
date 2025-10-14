@@ -12,10 +12,7 @@
     "build:mokamstage": "cross-env VITE_APP_ENV=staging vite build",
     "build:mokamprod": "cross-env VITE_APP_ENV=production vite build",
     "lint": "eslint .",
-    "preview": "cross-env VITE_APP_ENV=lovable vite preview",
-    "preview:mokamdev": "cross-env VITE_APP_ENV=development vite preview",
-    "preview:mokamstage": "cross-env VITE_APP_ENV=staging vite preview",
-    "preview:mokamprod": "cross-env VITE_APP_ENV=production vite preview"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
