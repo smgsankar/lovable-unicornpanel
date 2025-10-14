@@ -11,8 +11,7 @@ for all the screens, the route should always have exactly 2 segments and 2 segme
 
 The userbase for this panel will be based in Bangladesh, so the values representing money should be prefixed with the taka symbol (৳), and in case of phone number related fields/values format/validate them properly with the Bangladeshi phone number format.
 
-For UI components and styling, strictly use antd and plain CSS modules, and import the CSS modules close to where it is being used. Keep all the screen relevant styles in its respective CSS module
-do not abstract any common styles away from the modules.
+For UI components and styling, strictly use `antd@5.17.2` and react style object (`React.CSSProperties`).
 
 For navigation, strictly use `react-router-dom@5.3.0` and for its types use `@types/react-router-dom@5.3.3` and its useHistory and useLocation hooks, strictly use the versions mentioned above. Always use history.goBack() for back button click handlers. And when using history.push(), use only the second segment of the target route without any forward slash(`/`).
 
@@ -76,7 +75,7 @@ For all the modules, once completed coding, make sure that the `index.ts` files 
 {
   // ...other module federation configs
   exposes: {
-    './<module_id>Components': './src/modules/<module_id>/index.ts',
+    './<module_id_capitalized>Components': './src/modules/<module_id>/index.ts',
   },
 }
 ```
