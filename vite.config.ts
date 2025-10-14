@@ -9,6 +9,7 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 3001,
+    cors: true,
   },
   plugins: [
     react(),
@@ -18,8 +19,9 @@ export default defineConfig(({ mode }) => ({
       filename: "remoteModules.js",
       manifest: true,
       exposes: {
-        'lovablehomemoduleComponents': './src/modules/lovablehomemodule/index.ts',
-        'udhsellermoduleComponents': './src/modules/udhsellermodule/index.ts',
+        "./lovablehomemoduleComponents":
+          "./src/modules/lovablehomemodule/index.ts",
+        "./udhsellermoduleComponents": "./src/modules/udhsellermodule/index.ts",
       },
       shared: {
         react: { singleton: true },
