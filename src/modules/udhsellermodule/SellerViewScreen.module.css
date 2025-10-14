@@ -44,3 +44,7 @@
   display: grid;
   gap: 16px;
 }
+
+.linkButton {
+  padding: 0 !important;
+}

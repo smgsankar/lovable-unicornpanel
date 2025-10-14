@@ -97,7 +97,7 @@ const SellerViewScreen = () => {
               <Descriptions.Item label="Shop Address">{seller.shop_address}</Descriptions.Item>
               {seller.verification_document_gcs_path && (
                 <Descriptions.Item label="Verification Document">
-                  <Button type="link" onClick={handleDocumentClick} style={{ padding: 0 }}>
+                  <Button type="link" onClick={handleDocumentClick} className={styles.linkButton}>
                     View Document
                   </Button>
                 </Descriptions.Item>

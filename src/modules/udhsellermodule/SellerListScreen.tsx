@@ -122,7 +122,6 @@ const SellerListScreen = () => {
       title: 'Phone',
       dataIndex: 'phone',
       key: 'phone',
-      render: (phone: string) => `৳${phone}`,
     },
     {
       title: 'Actions',

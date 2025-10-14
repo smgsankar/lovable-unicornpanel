@@ -8,7 +8,7 @@ import { federation } from "@module-federation/vite";
 export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
-    port: 3001,
+    port: 8080,
     cors: true,
   },
   plugins: [
@@ -19,9 +19,9 @@ export default defineConfig(({ mode }) => ({
       filename: "remoteModules.js",
       manifest: true,
       exposes: {
-        "./lovablehomemoduleComponents":
+        "./LovablehomemoduleComponents":
           "./src/modules/lovablehomemodule/index.ts",
-        "./udhsellermoduleComponents": "./src/modules/udhsellermodule/index.ts",
+        "./UdhsellermoduleComponents": "./src/modules/udhsellermodule/index.ts",
       },
       shared: {
         react: { singleton: true },
