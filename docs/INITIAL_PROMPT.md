@@ -53,7 +53,7 @@ warning - #fff7ec
 neutral - #333333
 
 For folder structure, keep all the modules isolated at `src/modules/<module_id>`, create an `index.ts` file at the root of each module and export all the screen level components of that module from there
-For all the modules, once completed coding, make sure to expose the `index.ts` files of each module in the module federation plugin as following,
+For all the modules, once completed coding, make sure that the `index.ts` files of every module is exposed in the module federation plugin as following,
 ```js
 {
   // ...other module federation configs

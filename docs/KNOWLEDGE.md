@@ -70,9 +70,9 @@ the action screen will have a heading with a back icon button
 there are 2 primary types of action screen layouts - view details layout and form-based(create/edit forms) layouts
 both the layouts will have one or more sections and each section will have a title, content(based on the type of layout) and a divider separating the content from the title
 
-For folder structure, keep all the modules isolated at `src/modules/<module_id>`, create an `index.ts` file at the root of each module and export all the screen level components of that module from there
+For folder structure, keep all the modules isolated at `src/modules/<module_id>`, create an `index.ts` file at the root of each module and export all the screen level components of that module from there.
 
-For all the modules, once completed coding, make sure to expose the `index.ts` files of each module in the module federation plugin as following,
+For all the modules, once completed coding, make sure that the `index.ts` files of every module is exposed in the module federation plugin as following,
 
 ```js
 {
