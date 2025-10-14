@@ -32,6 +32,11 @@ const MainLayout = ({ children }: MainLayoutProps) => {
       icon: <HomeOutlined />,
       path: '/lovablehomemodule/home',
     },
+    {
+      key: 'udhsellermodule',
+      label: 'Sellers',
+      path: '/udhsellermodule/sellers',
+    },
   ];
 
   const handleMenuClick = (path: string) => {

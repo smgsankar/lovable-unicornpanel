@@ -3,6 +3,7 @@ import { ConfigProvider } from 'antd';
 import MainLayout from './layouts/MainLayout';
 import BlankScreen from './pages/BlankScreen';
 import { HomeScreen } from './modules/lovablehomemodule';
+import { SellerListScreen, SellerFormScreen, SellerViewScreen } from './modules/udhsellermodule';
 import NotFound from './pages/NotFound';
 import './App.css';
 
@@ -26,6 +27,10 @@ const App = () => {
           <Switch>
             <Route exact path="/" component={BlankScreen} />
             <Route exact path="/lovablehomemodule/home" component={HomeScreen} />
+            <Route exact path="/udhsellermodule/sellers" component={SellerListScreen} />
+            <Route exact path="/udhsellermodule/create" component={SellerFormScreen} />
+            <Route exact path="/udhsellermodule/edit" component={SellerFormScreen} />
+            <Route exact path="/udhsellermodule/view" component={SellerViewScreen} />
             <Route path="*" component={NotFound} />
           </Switch>
         </MainLayout>

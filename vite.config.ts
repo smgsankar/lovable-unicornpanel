@@ -19,6 +19,7 @@ export default defineConfig(({ mode }) => ({
       manifest: true,
       exposes: {
         'lovablehomemoduleComponents': './src/modules/lovablehomemodule/index.ts',
+        'udhsellermoduleComponents': './src/modules/udhsellermodule/index.ts',
       },
       shared: {
         react: { singleton: true },
