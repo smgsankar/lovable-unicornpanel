@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Button, Card, Spin } from 'antd';
+import { Button, Card, Spin, message } from 'antd';
 import { useHistory, useLocation } from 'react-router-dom';
 import { fetch, getGcsDownloadUrl } from '../../apiClient';
-import { toast } from '@/components/ui/use-toast';
 import dayjs from 'dayjs';
 
 interface ClaimData {
@@ -104,11 +103,7 @@ const ClaimSubmissionViewScreen = () => {
       setClaimData(response.data);
     } catch (error: any) {
       console.error('Error fetching claim data:', error);
-      toast({
-        title: 'Error',
-        description: error.message || 'Failed to fetch claim data',
-        variant: 'destructive',
-      });
+      message.error(error.message || 'Failed to fetch claim data');
     } finally {
       setLoading(false);
     }
@@ -120,11 +115,7 @@ const ClaimSubmissionViewScreen = () => {
       window.open(url, '_blank');
     } catch (error: any) {
       console.error('Error downloading file:', error);
-      toast({
-        title: 'Error',
-        description: error.message || 'Failed to download file',
-        variant: 'destructive',
-      });
+      message.error(error.message || 'Failed to download file');
     }
   };
 

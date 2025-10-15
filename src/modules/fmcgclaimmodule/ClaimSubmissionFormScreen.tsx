@@ -3,7 +3,6 @@ import { Button, DatePicker, Input, Upload, Card, Modal, message } from 'antd';
 import { useHistory, useLocation } from 'react-router-dom';
 import { UploadOutlined } from '@ant-design/icons';
 import { fetch, uploadFileToGcs } from '../../apiClient';
-import { toast } from '@/components/ui/use-toast';
 import dayjs, { Dayjs } from 'dayjs';
 import type { UploadFile } from 'antd/es/upload/interface';
 
@@ -139,11 +138,7 @@ const ClaimSubmissionFormScreen = () => {
       }
     } catch (error: any) {
       console.error('Error fetching claim data:', error);
-      toast({
-        title: 'Error',
-        description: error.message || 'Failed to fetch claim data',
-        variant: 'destructive',
-      });
+      message.error(error.message || 'Failed to fetch claim data');
     } finally {
       setLoading(false);
     }
@@ -175,11 +170,7 @@ const ClaimSubmissionFormScreen = () => {
       setAggregateData(response.data);
     } catch (error: any) {
       console.error('Error fetching aggregate data:', error);
-      toast({
-        title: 'Error',
-        description: error.message || 'Failed to fetch aggregate data',
-        variant: 'destructive',
-      });
+      message.error(error.message || 'Failed to fetch aggregate data');
     } finally {
       setLoading(false);
     }
@@ -267,18 +258,11 @@ const ClaimSubmissionFormScreen = () => {
         }
       );
 
-      toast({
-        title: 'Success',
-        description: response.message,
-      });
+      message.success(response.message);
       history.push('/fmcgclaimmodule/claimsubmissionlist');
     } catch (error: any) {
       console.error('Error submitting claim:', error);
-      toast({
-        title: 'Error',
-        description: error.message || 'Failed to submit claim',
-        variant: 'destructive',
-      });
+      message.error(error.message || 'Failed to submit claim');
     } finally {
       setUploading(false);
       setIsModalVisible(false);

@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Button, Input, Select, Table, Tag, Space, DatePicker } from 'antd';
+import { Button, Input, Select, Table, Tag, Space, DatePicker, message } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { fetch } from '../../apiClient';
-import { toast } from '@/components/ui/use-toast';
 import dayjs from 'dayjs';
 
 const { MonthPicker } = DatePicker;
@@ -143,11 +142,7 @@ const ClaimSubmissionListScreen = () => {
       setPagination({ ...pagination, current: page, total: response.data.length });
     } catch (error: any) {
       console.error('Error fetching claims:', error);
-      toast({
-        title: 'Error',
-        description: error.message || 'Failed to fetch claims',
-        variant: 'destructive',
-      });
+      message.error(error.message || 'Failed to fetch claims');
     } finally {
       setLoading(false);
     }
@@ -308,6 +303,7 @@ const ClaimSubmissionListScreen = () => {
         dataSource={claims}
         loading={loading}
         rowKey="id"
+        scroll={{ x: 1500 }}
         pagination={{
           current: pagination.current,
           pageSize: pagination.pageSize,
