@@ -188,19 +188,21 @@ const MainLayout = ({ children }: MainLayoutProps) => {
           {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
         </div>
 
-        <Menu
-          mode="inline"
-          selectedKeys={[getActiveKeys()]}
-          defaultOpenKeys={getOpenKeys()}
-          items={renderMenuItems(menuItems)}
-          style={{
-            borderRight: 'none',
-            backgroundColor: 'transparent',
-            marginTop: '16px',
-            paddingBottom: '80px',
-          }}
-          theme="light"
-        />
+        {!collapsed && (
+          <Menu
+            mode="inline"
+            selectedKeys={[getActiveKeys()]}
+            defaultOpenKeys={getOpenKeys()}
+            items={renderMenuItems(menuItems)}
+            style={{
+              borderRight: 'none',
+              backgroundColor: 'transparent',
+              marginTop: '16px',
+              paddingBottom: '80px',
+            }}
+            theme="light"
+          />
+        )}
       </Sider>
 
       <Layout style={styles.contentLayout}>
