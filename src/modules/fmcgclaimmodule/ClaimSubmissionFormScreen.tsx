@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Button, DatePicker, Input, Upload, Card, Modal, message } from 'antd';
 import { useHistory, useLocation } from 'react-router-dom';
 import { UploadOutlined } from '@ant-design/icons';
+import { ArrowLeft } from 'lucide-react';
 import { fetch, uploadFileToGcs } from '../../apiClient';
 import dayjs, { Dayjs } from 'dayjs';
 import type { UploadFile } from 'antd/es/upload/interface';
@@ -277,9 +278,11 @@ const ClaimSubmissionFormScreen = () => {
   return (
     <div style={styles.container}>
       <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
-        <Button onClick={() => history.push('/fmcgclaimmodule/claimsubmissionlist')}>
-          ← Back
-        </Button>
+        <Button 
+          icon={<ArrowLeft size={20} />} 
+          onClick={() => history.push('/fmcgclaimmodule/claimsubmissionlist')}
+          type="text"
+        />
         <h1 style={{ ...styles.heading, margin: 0 }}>
           {isEditMode ? `Edit claim - ${claimId}` : 'Create Claim'}
         </h1>

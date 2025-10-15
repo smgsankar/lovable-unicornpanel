@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Button, Card, Spin, message, Tag } from 'antd';
 import { useHistory, useLocation } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
 import { fetch, getGcsDownloadUrl } from '../../apiClient';
 import dayjs from 'dayjs';
 
@@ -164,9 +165,11 @@ const ClaimSubmissionViewScreen = () => {
     <div style={styles.container}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <Button onClick={() => history.push('/fmcgclaimmodule/claimsubmissionlist')}>
-            ← Back
-          </Button>
+          <Button 
+            icon={<ArrowLeft size={20} />} 
+            onClick={() => history.push('/fmcgclaimmodule/claimsubmissionlist')}
+            type="text"
+          />
           <h1 style={{ ...styles.heading, margin: 0 }}>View Claim - {claimData.id}</h1>
         </div>
         <Tag color={getStatusColor(claimData.status)}>{getStatusLabel(claimData.status)}</Tag>
