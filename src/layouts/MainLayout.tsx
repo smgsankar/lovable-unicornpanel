@@ -84,8 +84,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
   const menuItems: MenuItem[] = [
     {
       key: 'lovablehomemodule',
-      label: 'Lovable Home',
-      icon: <HomeOutlined />,
+      label: 'Home',
       path: '/lovablehomemodule/home',
     },
     {
