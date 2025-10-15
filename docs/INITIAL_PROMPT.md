@@ -11,13 +11,12 @@ for all the screens, the route should always have exactly 2 segments and 2 segme
 All the module IDs should have `module` as suffix
 The userbase for this panel will be based in Bangladesh, so the values representing money should be prefixed with the taka symbol (৳)
 and in case of phone number related fields/values format/validate them properly with the Bangladeshi phone number format
-For UI components and styling, strictly use antd and plain CSS modules, and import the CSS modules close to where it is being used
-keep all the screen relevant styles in its respective CSS module
-do not abstract any common styles away from the modules
+For UI components and styling, strictly use `antd@5.17.2` and react style object (`React.CSSProperties`).
 For navigation, strictly use react-router-dom v5 and its useHistory and useLocation hooks
 always use history.goBack() for back button click handlers
 and when using history.push(), use only the second segment of the target route without any forward slash(`/`)
 Use `federation` plugin from `@module-federation/vite` to setup module federation with the following config,
+
 ```js
 {
   name: "lovableunicornpanel", // container app name here
@@ -55,6 +54,7 @@ neutral - #333333
 
 For folder structure, keep all the modules isolated at `src/modules/<module_id>`, create an `index.ts` file at the root of each module and export all the screen level components of that module from there
 For all the modules, once completed coding, make sure that the `index.ts` files of every module is exposed in the module federation plugin as following,
+
 ```js
 {
   // ...other module federation configs
