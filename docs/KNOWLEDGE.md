@@ -96,3 +96,10 @@ For GET and POST API calls, if there is any error with the API, show proper erro
 For POST API calls (or the ones involving any user action) alone, if the server responds with a message, show that to the user as a Toast message
 
 For Toast message - use antd's message
+make the table components horizontally scrollable if needed
+
+for form based screens, always have 2 columns unless specified
+and only for elements like multi file upload/text area take up 2 colspans
+for rest take up 1 colspan even for single file upload
+
+in case of multi file upload, add support for drag and drop for the supported file types
