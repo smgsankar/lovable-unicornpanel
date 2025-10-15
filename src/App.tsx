@@ -8,6 +8,11 @@ import {
   SellerFormScreen,
   SellerViewScreen,
 } from "./modules/udhsellermodule";
+import {
+  ClaimSubmissionListScreen,
+  ClaimSubmissionFormScreen,
+  ClaimSubmissionViewScreen,
+} from "./modules/fmcgclaimmodule";
 import NotFound from "./pages/NotFound";
 import "./App.css";
 
@@ -208,6 +213,26 @@ const App = () => {
               exact
               path="/udhsellermodule/view"
               component={SellerViewScreen}
+            />
+            <Route
+              exact
+              path="/fmcgclaimmodule/claimsubmissionlist"
+              component={ClaimSubmissionListScreen}
+            />
+            <Route
+              exact
+              path="/fmcgclaimmodule/claimsubmissioncreate"
+              component={ClaimSubmissionFormScreen}
+            />
+            <Route
+              exact
+              path="/fmcgclaimmodule/claimsubmissionedit"
+              component={ClaimSubmissionFormScreen}
+            />
+            <Route
+              exact
+              path="/fmcgclaimmodule/claimsubmissionview"
+              component={ClaimSubmissionViewScreen}
             />
             <Route path="*" component={NotFound} />
           </Switch>

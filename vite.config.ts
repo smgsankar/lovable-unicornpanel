@@ -22,6 +22,7 @@ export default defineConfig(({ mode }) => ({
         "./LovablehomemoduleComponents":
           "./src/modules/lovablehomemodule/index.ts",
         "./UdhsellermoduleComponents": "./src/modules/udhsellermodule/index.ts",
+        "./FmcgclaimmoduleComponents": "./src/modules/fmcgclaimmodule/index.ts",
       },
       shared: {
         react: { singleton: true },

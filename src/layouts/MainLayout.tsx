@@ -37,6 +37,17 @@ const MainLayout = ({ children }: MainLayoutProps) => {
       label: 'Sellers',
       path: '/udhsellermodule/sellers',
     },
+    {
+      key: 'fmcgclaimmodule',
+      label: 'FMCG Claim',
+      children: [
+        {
+          key: 'fmcgclaimmodule-claimsubmission',
+          label: 'Claim Submission',
+          path: '/fmcgclaimmodule/claimsubmissionlist',
+        },
+      ],
+    },
   ];
 
   const handleMenuClick = (path: string) => {
