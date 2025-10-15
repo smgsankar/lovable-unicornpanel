@@ -295,30 +295,26 @@ const ClaimSubmissionFormScreen = () => {
             />
           </div>
 
-          {aggregateData && (
-            <>
-              <div style={styles.formItem}>
-                <label style={styles.label}>Order claim amount</label>
-                <div style={styles.readOnlyValue}>
-                  ৳{aggregateData.order_claim_amount.toFixed(2)}
-                </div>
-              </div>
+          <div style={styles.formItem}>
+            <label style={styles.label}>Order claim amount</label>
+            <div style={styles.readOnlyValue}>
+              ৳{aggregateData ? aggregateData.order_claim_amount.toFixed(2) : '0.00'}
+            </div>
+          </div>
 
-              <div style={styles.formItem}>
-                <label style={styles.label}>Order damage amount</label>
-                <div style={styles.readOnlyValue}>
-                  ৳{aggregateData.order_damaged_amount.toFixed(2)}
-                </div>
-              </div>
+          <div style={styles.formItem}>
+            <label style={styles.label}>Order damage amount</label>
+            <div style={styles.readOnlyValue}>
+              ৳{aggregateData ? aggregateData.order_damaged_amount.toFixed(2) : '0.00'}
+            </div>
+          </div>
 
-              <div style={styles.formItem}>
-                <label style={styles.label}>Claim used amount</label>
-                <div style={styles.readOnlyValue}>
-                  ৳{claimUsedAmount.toFixed(2)}
-                </div>
-              </div>
-            </>
-          )}
+          <div style={styles.formItem}>
+            <label style={styles.label}>Claim used amount</label>
+            <div style={styles.readOnlyValue}>
+              ৳{claimUsedAmount.toFixed(2)}
+            </div>
+          </div>
 
           <div style={styles.formItem}>
             <label style={styles.label}>

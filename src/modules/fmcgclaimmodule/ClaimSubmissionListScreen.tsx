@@ -190,11 +190,6 @@ const ClaimSubmissionListScreen = () => {
       ),
     },
     {
-      title: 'Shop address',
-      key: 'shop_address',
-      render: () => '-',
-    },
-    {
       title: 'Claim Used Amount',
       key: 'claim_used_amount',
       render: (_: any, record: ClaimSubmission) => (
