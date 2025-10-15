@@ -56,10 +56,10 @@ const MainLayout = ({ children }: MainLayoutProps) => {
 
   const renderMenuItems = (items: MenuItem[]) => {
     return items.map((item) => {
-      const hasMultipleChildren = item.children && item.children.length >= 2;
+      const hasChildren = item.children && item.children.length > 0;
 
-      if (hasMultipleChildren) {
-        // Collapsible submenu for modules with 2+ submodules
+      if (hasChildren) {
+        // Collapsible submenu for modules with submodules
         return {
           key: item.key,
           label: item.label,
@@ -71,7 +71,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
           })),
         };
       } else {
-        // Direct navigation for modules with 0-1 submodules
+        // Direct navigation for modules without submodules
         return {
           key: item.key,
           label: item.label,
@@ -84,11 +84,25 @@ const MainLayout = ({ children }: MainLayoutProps) => {
 
   // Get active keys based on current route
   const getActiveKeys = () => {
-    const pathSegments = location.pathname.split('/').filter(Boolean);
-    if (pathSegments.length >= 1) {
-      return pathSegments[0];
+    const currentPath = location.pathname;
+    
+    // Check if any submenu item matches the current path
+    for (const item of menuItems) {
+      if (item.children) {
+        for (const child of item.children) {
+          if (child.path === currentPath) {
+            return child.key;
+          }
+        }
+      }
+      if (item.path === currentPath) {
+        return item.key;
+      }
     }
-    return '';
+    
+    // Fallback to first segment
+    const pathSegments = currentPath.split('/').filter(Boolean);
+    return pathSegments.length >= 1 ? pathSegments[0] : '';
   };
 
   const getOpenKeys = () => {
