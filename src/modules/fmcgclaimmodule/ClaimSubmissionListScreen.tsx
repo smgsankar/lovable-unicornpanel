@@ -209,8 +209,11 @@ const ClaimSubmissionListScreen = () => {
       title: 'Status',
       dataIndex: 'status',
       key: 'status',
+      width: 180,
       render: (status: number) => (
-        <Tag color={getStatusColor(status)}>{getStatusLabel(status)}</Tag>
+        <Tag color={getStatusColor(status)} style={{ whiteSpace: 'normal' }}>
+          {getStatusLabel(status)}
+        </Tag>
       ),
     },
     {
