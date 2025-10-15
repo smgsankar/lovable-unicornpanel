@@ -3,6 +3,7 @@ import { Button, DatePicker, Input, Upload, Card, Modal, message } from 'antd';
 import { useHistory, useLocation } from 'react-router-dom';
 import { UploadOutlined } from '@ant-design/icons';
 import { ArrowLeft } from 'lucide-react';
+import { Separator } from '@/components/ui/separator';
 import { fetch, uploadFileToGcs } from '../../apiClient';
 import dayjs, { Dayjs } from 'dayjs';
 import type { UploadFile } from 'antd/es/upload/interface';
@@ -30,7 +31,7 @@ interface ClaimData {
 
 const styles: Record<string, React.CSSProperties> = {
   container: {
-    padding: '24px',
+    padding: '32px',
   },
   heading: {
     fontSize: '24px',
@@ -289,8 +290,9 @@ const ClaimSubmissionFormScreen = () => {
       </div>
 
       <div style={{ marginBottom: '24px' }}>
-        <h2 style={styles.sectionTitle}>Claim details</h2>
         <Card>
+          <h2 style={styles.sectionTitle}>Claim details</h2>
+          <Separator className="mb-4" />
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
             <div style={styles.formItem}>
               <label style={styles.label}>
@@ -341,8 +343,9 @@ const ClaimSubmissionFormScreen = () => {
       </div>
 
       <div style={{ marginBottom: '24px' }}>
-        <h2 style={styles.sectionTitle}>Supporting documents</h2>
         <Card>
+          <h2 style={styles.sectionTitle}>Supporting documents</h2>
+          <Separator className="mb-4" />
           <div style={styles.formItem}>
             <label style={styles.label}>
               Anchor system file(s) <span style={styles.required}>*</span>

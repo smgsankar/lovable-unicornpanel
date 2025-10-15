@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Button, Card, Spin, message, Tag } from 'antd';
 import { useHistory, useLocation } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
+import { Separator } from '@/components/ui/separator';
 import { fetch, getGcsDownloadUrl } from '../../apiClient';
 import dayjs from 'dayjs';
 
@@ -37,7 +38,7 @@ const getStatusColor = (status: number) => {
 
 const styles: Record<string, React.CSSProperties> = {
   container: {
-    padding: '24px',
+    padding: '32px',
   },
   heading: {
     fontSize: '24px',
@@ -176,8 +177,9 @@ const ClaimSubmissionViewScreen = () => {
       </div>
 
       <div style={{ marginBottom: '24px' }}>
-        <h2 style={styles.sectionTitle}>Claim details</h2>
         <Card>
+          <h2 style={styles.sectionTitle}>Claim details</h2>
+          <Separator className="mb-4" />
           <div style={styles.fieldRow}>
             <div style={styles.fieldLabel}>Claim ID</div>
             <div style={styles.fieldValue}>{claimData.id}</div>

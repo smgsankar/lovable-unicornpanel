@@ -143,7 +143,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
       </Sider>
 
       <Layout className={styles.contentLayout}>
-        <Content className={styles.content}>{children}</Content>
+        <Content>{children}</Content>
       </Layout>
     </Layout>
   );

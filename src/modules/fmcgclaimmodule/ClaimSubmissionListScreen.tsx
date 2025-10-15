@@ -50,7 +50,7 @@ const getStatusColor = (status: number) => {
 
 const styles: Record<string, React.CSSProperties> = {
   container: {
-    padding: '24px',
+    padding: '32px',
   },
   header: {
     display: 'flex',
