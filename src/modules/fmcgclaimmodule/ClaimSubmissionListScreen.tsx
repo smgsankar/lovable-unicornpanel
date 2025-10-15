@@ -346,6 +346,7 @@ const ClaimSubmissionListScreen = () => {
           total: pagination.total,
           onChange: (page) => fetchClaims(page),
         }}
+        bordered
       />
     </div>
   );
