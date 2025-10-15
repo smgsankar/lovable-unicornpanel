@@ -7,7 +7,7 @@ In the sidebar, highlight the active module and/or its submodule with a small in
 The modules in side navbar should also be collapsable if it has more than 1 sub module, show collapsible sub modules only if the module has 2 or more sub modules, if it has 0 to 1 sub modules, clicking on the module itself should navigate to the relevant screen.
 
 The screen routes should always be in the format, `/<module_id>/<sub_module_id or path_to_screen>`
-for all the screens, the route should always have exactly 2 segments and 2 segments only with optional query parameters if needed. All the module IDs should have `module` as suffix.
+for all the screens, the route should always have exactly 2 segments and 2 segments only with optional query parameters if needed. All the module IDs should have `module` as suffix. For sub modules, prefix the submodule ID with the second segment. Sub module IDs need not have any suffix.
 
 The userbase for this panel will be based in Bangladesh, so the values representing money should be prefixed with the taka symbol (৳), and in case of phone number related fields/values format/validate them properly with the Bangladeshi phone number format.
 
@@ -91,3 +91,6 @@ For file upload based fields, upon form submission, before calling the form subm
 Similarly to download a file or opening a file in new tab, check if the API returns a file gcs path, if so get the signed URL for the file/resource with the help of `getGcsDownloadUrl` method in `src/apiClient.ts` file and then download the file from the URL or open the URL in the new tab whichever is needed.
 
 For any API, if it requires `warehouse_id` in request params/payload, get the value from local storage (key - warehouse_id) and pass it as a number, if the value is not available pass 0
+
+For GET and POST API calls, if there is any error with the API, show proper error message as a Toast message to the user
+For POST API calls (or the ones involving any user action) alone, if the server responds with a message, show that to the user as a Toast message
