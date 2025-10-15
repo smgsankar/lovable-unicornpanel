@@ -260,12 +260,6 @@ const ClaimSubmissionViewScreen = () => {
           </div>
         </Card>
       </div>
-
-      <div style={styles.buttonGroup}>
-        <Button onClick={() => history.push('/fmcgclaimmodule/claimsubmissionlist')}>
-          Back to List
-        </Button>
-      </div>
     </div>
   );
 };
