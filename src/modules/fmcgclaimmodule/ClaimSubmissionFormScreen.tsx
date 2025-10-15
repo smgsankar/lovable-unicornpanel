@@ -283,49 +283,51 @@ const ClaimSubmissionFormScreen = () => {
       <div style={{ marginBottom: '24px' }}>
         <h2 style={styles.sectionTitle}>Claim details</h2>
         <Card>
-          <div style={styles.formItem}>
-            <label style={styles.label}>
-              Date range <span style={styles.required}>*</span>
-            </label>
-            <RangePicker
-              value={dateRange}
-              onChange={handleDateRangeChange}
-              style={{ width: '100%' }}
-              disabled={loading}
-            />
-          </div>
-
-          <div style={styles.formItem}>
-            <label style={styles.label}>Order claim amount</label>
-            <div style={styles.readOnlyValue}>
-              ৳{aggregateData ? aggregateData.order_claim_amount.toFixed(2) : '0.00'}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+            <div style={styles.formItem}>
+              <label style={styles.label}>
+                Date range <span style={styles.required}>*</span>
+              </label>
+              <RangePicker
+                value={dateRange}
+                onChange={handleDateRangeChange}
+                style={{ width: '100%' }}
+                disabled={loading}
+              />
             </div>
-          </div>
 
-          <div style={styles.formItem}>
-            <label style={styles.label}>Order damage amount</label>
-            <div style={styles.readOnlyValue}>
-              ৳{aggregateData ? aggregateData.order_damaged_amount.toFixed(2) : '0.00'}
+            <div style={styles.formItem}>
+              <label style={styles.label}>Order claim amount</label>
+              <div style={styles.readOnlyValue}>
+                ৳{aggregateData ? aggregateData.order_claim_amount.toFixed(2) : '0.00'}
+              </div>
             </div>
-          </div>
 
-          <div style={styles.formItem}>
-            <label style={styles.label}>Claim used amount</label>
-            <div style={styles.readOnlyValue}>
-              ৳{claimUsedAmount.toFixed(2)}
+            <div style={styles.formItem}>
+              <label style={styles.label}>Order damage amount</label>
+              <div style={styles.readOnlyValue}>
+                ৳{aggregateData ? aggregateData.order_damaged_amount.toFixed(2) : '0.00'}
+              </div>
             </div>
-          </div>
 
-          <div style={styles.formItem}>
-            <label style={styles.label}>
-              Anchor claim amount <span style={styles.required}>*</span>
-            </label>
-            <Input
-              type="number"
-              value={anchorClaimAmount}
-              onChange={(e) => setAnchorClaimAmount(e.target.value)}
-              placeholder="Enter anchor claim amount"
-            />
+            <div style={styles.formItem}>
+              <label style={styles.label}>Claim used amount</label>
+              <div style={styles.readOnlyValue}>
+                ৳{claimUsedAmount.toFixed(2)}
+              </div>
+            </div>
+
+            <div style={styles.formItem}>
+              <label style={styles.label}>
+                Anchor claim amount <span style={styles.required}>*</span>
+              </label>
+              <Input
+                type="number"
+                value={anchorClaimAmount}
+                onChange={(e) => setAnchorClaimAmount(e.target.value)}
+                placeholder="Enter anchor claim amount"
+              />
+            </div>
           </div>
         </Card>
       </div>
@@ -337,7 +339,7 @@ const ClaimSubmissionFormScreen = () => {
             <label style={styles.label}>
               Anchor system file(s) <span style={styles.required}>*</span>
             </label>
-            <Upload
+            <Upload.Dragger
               fileList={fileList}
               onChange={handleFileChange}
               beforeUpload={() => false}
@@ -345,8 +347,12 @@ const ClaimSubmissionFormScreen = () => {
               multiple
               maxCount={4}
             >
-              <Button icon={<UploadOutlined />}>Select Files (Max 4)</Button>
-            </Upload>
+              <p className="ant-upload-drag-icon">
+                <UploadOutlined />
+              </p>
+              <p className="ant-upload-text">Click or drag files to upload</p>
+              <p className="ant-upload-hint">Support for jpg, png, pdf, csv, xls files (Max 4 files)</p>
+            </Upload.Dragger>
           </div>
         </Card>
       </div>
