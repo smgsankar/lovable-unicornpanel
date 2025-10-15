@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Form, Input, Button, Upload, message } from 'antd';
+import { Form, Input, Button, Upload, message, Card } from 'antd';
 import { ArrowLeftOutlined, UploadOutlined } from '@ant-design/icons';
 import { useHistory, useLocation } from 'react-router-dom';
 import { fetch, uploadFileToGcs } from '../../apiClient';
@@ -35,22 +35,18 @@ const styles: Record<string, React.CSSProperties> = {
     color: '#1A1A1A',
     margin: 0,
   },
-  section: {
-    background: '#FFFFFF',
-    borderRadius: '4px',
-    padding: '24px',
+  sectionWrapper: {
     marginBottom: '24px',
   },
   sectionTitle: {
     fontSize: '18px',
     fontWeight: 600,
     color: '#1A1A1A',
-    margin: '0 0 16px 0',
+    margin: '0 0 12px 0',
   },
-  divider: {
-    height: '1px',
-    background: '#E6E6E6',
-    marginBottom: '24px',
+  card: {
+    background: '#FFFFFF',
+    borderRadius: '4px',
   },
   sectionContent: {
     display: 'grid',
@@ -199,70 +195,72 @@ const SellerFormScreen = () => {
       </div>
 
       <Form form={form} layout="vertical" onFinish={handleSubmit}>
-        <div style={styles.section}>
+        <div style={styles.sectionWrapper}>
           <h2 style={styles.sectionTitle}>Seller details</h2>
-          <div style={styles.divider} />
-          <div style={styles.sectionContent}>
-            <Form.Item
-              name="name"
-              label="Seller Name"
-              rules={[
-                { required: true, message: 'Please enter seller name' },
-                { max: 80, message: 'Maximum 80 characters allowed' },
-              ]}
-            >
-              <Input placeholder="Enter seller name" maxLength={80} />
-            </Form.Item>
+          <Card style={styles.card}>
+            <div style={styles.sectionContent}>
+              <Form.Item
+                name="name"
+                label="Seller Name"
+                rules={[
+                  { required: true, message: 'Please enter seller name' },
+                  { max: 80, message: 'Maximum 80 characters allowed' },
+                ]}
+              >
+                <Input placeholder="Enter seller name" maxLength={80} />
+              </Form.Item>
 
-            <Form.Item
-              name="shop_name"
-              label="Shop Name"
-              rules={[
-                { required: true, message: 'Please enter shop name' },
-                { max: 150, message: 'Maximum 150 characters allowed' },
-              ]}
-            >
-              <Input placeholder="Enter shop name" maxLength={150} />
-            </Form.Item>
+              <Form.Item
+                name="shop_name"
+                label="Shop Name"
+                rules={[
+                  { required: true, message: 'Please enter shop name' },
+                  { max: 150, message: 'Maximum 150 characters allowed' },
+                ]}
+              >
+                <Input placeholder="Enter shop name" maxLength={150} />
+              </Form.Item>
 
-            <Form.Item
-              name="phone"
-              label="Phone"
-              rules={[
-                { required: true, message: 'Please enter phone number' },
-                {
-                  pattern: /^(\+?880|0)?1[3-9]\d{8}$/,
-                  message: 'Please enter a valid Bangladesh phone number',
-                },
-              ]}
-            >
-              <Input placeholder="01712345678" type="tel" />
-            </Form.Item>
+              <Form.Item
+                name="phone"
+                label="Phone"
+                rules={[
+                  { required: true, message: 'Please enter phone number' },
+                  {
+                    pattern: /^(\+?880|0)?1[3-9]\d{8}$/,
+                    message: 'Please enter a valid Bangladesh phone number',
+                  },
+                ]}
+              >
+                <Input placeholder="01712345678" type="tel" />
+              </Form.Item>
 
-            <Form.Item
-              name="shop_address"
-              label="Shop Address"
-              rules={[{ required: true, message: 'Please enter shop address' }]}
-            >
-              <TextArea placeholder="Enter shop address" rows={3} />
-            </Form.Item>
-          </div>
+              <Form.Item
+                name="shop_address"
+                label="Shop Address"
+                rules={[{ required: true, message: 'Please enter shop address' }]}
+              >
+                <TextArea placeholder="Enter shop address" rows={3} />
+              </Form.Item>
+            </div>
+          </Card>
         </div>
 
-        <div style={styles.section}>
+        <div style={styles.sectionWrapper}>
           <h2 style={styles.sectionTitle}>Supporting documents</h2>
-          <div style={styles.divider} />
-          <div style={styles.sectionContent}>
-            <Form.Item
-              name="verification_document"
-              label="Verification Document"
-              rules={[{ required: !isEdit, message: 'Please upload verification document' }]}
-            >
-              <Upload {...uploadProps}>
-                <Button icon={<UploadOutlined />}>Select File</Button>
-              </Upload>
-            </Form.Item>
-          </div>
+          <Card style={styles.card}>
+            <div style={styles.sectionContent}>
+              <Form.Item
+                name="verification_document"
+                label="Verification Document"
+                rules={[{ required: !isEdit, message: 'Please upload verification document' }]}
+              >
+                <Upload {...uploadProps}>
+                  <Button icon={<UploadOutlined />}>Select File</Button>
+                </Upload>
+              </Form.Item>
+            </div>
+          </Card>
         </div>
 
         <div style={styles.actions}>
