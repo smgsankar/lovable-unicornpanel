@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Button, Card, Spin, message, Tag } from 'antd';
+import { Button, Card, Spin, message, Tag, Divider } from 'antd';
 import { useHistory, useLocation } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
-import { Separator } from '@/components/ui/separator';
 import { fetch, getGcsDownloadUrl } from '../../apiClient';
 import dayjs from 'dayjs';
 
@@ -179,7 +178,7 @@ const ClaimSubmissionViewScreen = () => {
       <div style={{ marginBottom: '24px' }}>
         <Card>
           <h2 style={styles.sectionTitle}>Claim details</h2>
-          <Separator style={{ marginBottom: '16px' }} />
+          <Divider style={{ margin: '0 0 16px 0' }} />
           <div style={styles.fieldRow}>
             <div style={styles.fieldLabel}>Claim ID</div>
             <div style={styles.fieldValue}>{claimData.id}</div>

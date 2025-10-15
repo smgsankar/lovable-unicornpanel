@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Button, DatePicker, Input, Upload, Card, Modal, message } from 'antd';
+import { Button, DatePicker, Input, Upload, Card, Modal, message, Divider } from 'antd';
 import { useHistory, useLocation } from 'react-router-dom';
 import { UploadOutlined } from '@ant-design/icons';
 import { ArrowLeft } from 'lucide-react';
-import { Separator } from '@/components/ui/separator';
 import { fetch, uploadFileToGcs } from '../../apiClient';
 import dayjs, { Dayjs } from 'dayjs';
 import type { UploadFile } from 'antd/es/upload/interface';
@@ -292,7 +291,7 @@ const ClaimSubmissionFormScreen = () => {
       <div style={{ marginBottom: '24px' }}>
         <Card>
           <h2 style={styles.sectionTitle}>Claim details</h2>
-          <Separator style={{ marginBottom: '16px' }} />
+          <Divider style={{ margin: '0 0 16px 0' }} />
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
             <div style={styles.formItem}>
               <label style={styles.label}>
@@ -345,7 +344,7 @@ const ClaimSubmissionFormScreen = () => {
       <div style={{ marginBottom: '24px' }}>
         <Card>
           <h2 style={styles.sectionTitle}>Supporting documents</h2>
-          <Separator style={{ marginBottom: '16px' }} />
+          <Divider style={{ margin: '0 0 16px 0' }} />
           <div style={styles.formItem}>
             <label style={styles.label}>
               Anchor system file(s) <span style={styles.required}>*</span>
