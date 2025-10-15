@@ -292,7 +292,7 @@ const ClaimSubmissionFormScreen = () => {
       <div style={{ marginBottom: '24px' }}>
         <Card>
           <h2 style={styles.sectionTitle}>Claim details</h2>
-          <Separator className="mb-4" />
+          <Separator style={{ marginBottom: '16px' }} />
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
             <div style={styles.formItem}>
               <label style={styles.label}>
@@ -345,7 +345,7 @@ const ClaimSubmissionFormScreen = () => {
       <div style={{ marginBottom: '24px' }}>
         <Card>
           <h2 style={styles.sectionTitle}>Supporting documents</h2>
-          <Separator className="mb-4" />
+          <Separator style={{ marginBottom: '16px' }} />
           <div style={styles.formItem}>
             <label style={styles.label}>
               Anchor system file(s) <span style={styles.required}>*</span>

@@ -179,7 +179,7 @@ const ClaimSubmissionViewScreen = () => {
       <div style={{ marginBottom: '24px' }}>
         <Card>
           <h2 style={styles.sectionTitle}>Claim details</h2>
-          <Separator className="mb-4" />
+          <Separator style={{ marginBottom: '16px' }} />
           <div style={styles.fieldRow}>
             <div style={styles.fieldLabel}>Claim ID</div>
             <div style={styles.fieldValue}>{claimData.id}</div>
