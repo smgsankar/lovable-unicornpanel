@@ -26,7 +26,12 @@ const styles: Record<string, React.CSSProperties> = {
   sider: {
     backgroundColor: '#FFFFFF',
     boxShadow: '2px 0 8px rgba(0, 0, 0, 0.05)',
-    position: 'relative',
+    position: 'fixed',
+    left: 0,
+    top: 0,
+    bottom: 0,
+    height: '100vh',
+    overflow: 'auto',
   },
   logoContainer: {
     height: '64px',
@@ -60,6 +65,13 @@ const styles: Record<string, React.CSSProperties> = {
   },
   contentLayout: {
     backgroundColor: '#F6F6F6',
+    marginLeft: '230px',
+    transition: 'margin-left 0.2s',
+  },
+  contentLayoutCollapsed: {
+    backgroundColor: '#F6F6F6',
+    marginLeft: '80px',
+    transition: 'margin-left 0.2s',
   },
 };
 
@@ -205,7 +217,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
         )}
       </Sider>
 
-      <Layout style={styles.contentLayout}>
+      <Layout style={collapsed ? styles.contentLayoutCollapsed : styles.contentLayout}>
         <Content>{children}</Content>
       </Layout>
     </Layout>
