@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Layout, Menu } from 'antd';
 import { useHistory, useLocation } from 'react-router-dom';
 import { HomeOutlined, MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
-import styles from './MainLayout.module.css';
 import logo from '@/assets/unicorn.png';
 
 const { Sider, Content } = Layout;
@@ -18,6 +17,51 @@ interface MenuItem {
   path?: string;
   children?: MenuItem[];
 }
+
+const styles: Record<string, React.CSSProperties> = {
+  layout: {
+    minHeight: '100vh',
+    backgroundColor: '#F6F6F6',
+  },
+  sider: {
+    backgroundColor: '#FFFFFF',
+    boxShadow: '2px 0 8px rgba(0, 0, 0, 0.05)',
+    position: 'relative',
+  },
+  logoContainer: {
+    height: '64px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 0,
+    borderBottom: '1px solid #E6E6E6',
+  },
+  logo: {
+    width: '100%',
+    height: 'auto',
+    objectFit: 'contain',
+  },
+  toggleButton: {
+    position: 'absolute',
+    bottom: '16px',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    width: '40px',
+    height: '40px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#F6F6F6',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    transition: 'all 0.3s',
+    color: '#4D4D4D',
+    zIndex: 10,
+  },
+  contentLayout: {
+    backgroundColor: '#F6F6F6',
+  },
+};
 
 const MainLayout = ({ children }: MainLayoutProps) => {
   const [collapsed, setCollapsed] = useState(false);
@@ -114,22 +158,33 @@ const MainLayout = ({ children }: MainLayoutProps) => {
   };
 
   return (
-    <Layout className={styles.layout}>
+    <Layout style={styles.layout}>
       <Sider
         collapsible
         collapsed={collapsed}
         onCollapse={setCollapsed}
         trigger={null}
-        className={styles.sider}
+        style={styles.sider as React.CSSProperties}
         width={230}
       >
         {!collapsed && (
-          <div className={styles.logoContainer}>
-            <img src={logo} alt="Unicorn" className={styles.logo} />
+          <div style={styles.logoContainer}>
+            <img src={logo} alt="Unicorn" style={styles.logo as React.CSSProperties} />
           </div>
         )}
 
-        <div className={styles.toggleButton} onClick={() => setCollapsed(!collapsed)}>
+        <div 
+          style={styles.toggleButton as React.CSSProperties}
+          onClick={() => setCollapsed(!collapsed)}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = '#E6E6E6';
+            e.currentTarget.style.color = '#45469D';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = '#F6F6F6';
+            e.currentTarget.style.color = '#4D4D4D';
+          }}
+        >
           {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
         </div>
 
@@ -138,11 +193,17 @@ const MainLayout = ({ children }: MainLayoutProps) => {
           selectedKeys={[getActiveKeys()]}
           defaultOpenKeys={getOpenKeys()}
           items={renderMenuItems(menuItems)}
-          className={styles.menu}
+          style={{
+            borderRight: 'none',
+            backgroundColor: 'transparent',
+            marginTop: '16px',
+            paddingBottom: '80px',
+          }}
+          theme="light"
         />
       </Sider>
 
-      <Layout className={styles.contentLayout}>
+      <Layout style={styles.contentLayout}>
         <Content>{children}</Content>
       </Layout>
     </Layout>
