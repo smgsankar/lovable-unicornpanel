@@ -94,3 +94,5 @@ For any API, if it requires `warehouse_id` in request params/payload, get the va
 
 For GET and POST API calls, if there is any error with the API, show proper error message as a Toast message to the user
 For POST API calls (or the ones involving any user action) alone, if the server responds with a message, show that to the user as a Toast message
+
+For Toast message - use antd's message
