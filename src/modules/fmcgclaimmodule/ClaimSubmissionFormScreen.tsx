@@ -276,9 +276,14 @@ const ClaimSubmissionFormScreen = () => {
 
   return (
     <div style={styles.container}>
-      <h1 style={styles.heading}>
-        {isEditMode ? `Edit claim - ${claimId}` : 'Create Claim'}
-      </h1>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
+        <Button onClick={() => history.push('/fmcgclaimmodule/claimsubmissionlist')}>
+          ← Back
+        </Button>
+        <h1 style={{ ...styles.heading, margin: 0 }}>
+          {isEditMode ? `Edit claim - ${claimId}` : 'Create Claim'}
+        </h1>
+      </div>
 
       <div style={{ marginBottom: '24px' }}>
         <h2 style={styles.sectionTitle}>Claim details</h2>

@@ -166,11 +166,9 @@ const ClaimSubmissionListScreen = () => {
       title: 'Claim ID',
       dataIndex: 'id',
       key: 'id',
-      render: (id: number) => (
-        <Button type="link" onClick={() => history.push(`/fmcgclaimmodule/claimsubmissionview?id=${id}`)}>
-          {id}
-        </Button>
-      ),
+      fixed: 'left' as const,
+      width: 100,
+      render: (id: number) => <span>{id}</span>,
     },
     {
       title: 'Date range',
@@ -235,11 +233,25 @@ const ClaimSubmissionListScreen = () => {
     {
       title: 'Actions',
       key: 'actions',
-      render: (_: any, record: ClaimSubmission) => (
-        <Button type="link" onClick={() => history.push(`/fmcgclaimmodule/claimsubmissionedit?id=${record.id}`)}>
-          Edit
-        </Button>
-      ),
+      fixed: 'right' as const,
+      width: 120,
+      render: (_: any, record: ClaimSubmission) => {
+        const isRejected = record.status === 2 || record.status === 4;
+        
+        if (isRejected) {
+          return (
+            <Button type="link" onClick={() => history.push(`/fmcgclaimmodule/claimsubmissionedit?id=${record.id}`)}>
+              Resubmit
+            </Button>
+          );
+        }
+        
+        return (
+          <Button type="link" onClick={() => history.push(`/fmcgclaimmodule/claimsubmissionview?id=${record.id}`)}>
+            View
+          </Button>
+        );
+      },
     },
   ];
 

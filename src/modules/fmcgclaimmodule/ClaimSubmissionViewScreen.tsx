@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Button, Card, Spin, message } from 'antd';
+import { Button, Card, Spin, message, Tag } from 'antd';
 import { useHistory, useLocation } from 'react-router-dom';
 import { fetch, getGcsDownloadUrl } from '../../apiClient';
 import dayjs from 'dayjs';
@@ -16,6 +16,23 @@ interface ClaimData {
   status: number;
   mismatch_reason: string | null;
 }
+
+const STATUS_OPTIONS = [
+  { value: 1, label: 'ROM Submission Approval Pending', color: 'orange' },
+  { value: 2, label: 'ROM Rejected', color: 'red' },
+  { value: 3, label: 'LT Submission Approval Pending', color: 'blue' },
+  { value: 4, label: 'LT Rejected', color: 'red' },
+  { value: 5, label: 'Created', color: 'default' },
+  { value: 6, label: 'Realized', color: 'green' },
+];
+
+const getStatusLabel = (status: number) => {
+  return STATUS_OPTIONS.find(s => s.value === status)?.label || '';
+};
+
+const getStatusColor = (status: number) => {
+  return STATUS_OPTIONS.find(s => s.value === status)?.color || 'default';
+};
 
 const styles: Record<string, React.CSSProperties> = {
   container: {
@@ -145,7 +162,15 @@ const ClaimSubmissionViewScreen = () => {
 
   return (
     <div style={styles.container}>
-      <h1 style={styles.heading}>View Claim - {claimData.id}</h1>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <Button onClick={() => history.push('/fmcgclaimmodule/claimsubmissionlist')}>
+            ← Back
+          </Button>
+          <h1 style={{ ...styles.heading, margin: 0 }}>View Claim - {claimData.id}</h1>
+        </div>
+        <Tag color={getStatusColor(claimData.status)}>{getStatusLabel(claimData.status)}</Tag>
+      </div>
 
       <div style={{ marginBottom: '24px' }}>
         <h2 style={styles.sectionTitle}>Claim details</h2>
