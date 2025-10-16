@@ -37,7 +37,7 @@ body {
 }
 
 .ant-table-tbody > tr > td {
-  border: none;
+  border: none !important;
 }
 
 /* latin */
