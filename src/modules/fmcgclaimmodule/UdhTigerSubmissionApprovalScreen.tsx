@@ -37,11 +37,6 @@ const styles: Record<string, React.CSSProperties> = {
     backgroundColor: '#F6F6F6',
     minHeight: 'calc(100vh - 64px)',
   },
-  contentSection: {
-    backgroundColor: '#FFFFFF',
-    padding: '24px',
-    borderRadius: '8px',
-  },
   header: {
     marginBottom: '24px',
   },
@@ -243,68 +238,66 @@ const UdhTigerSubmissionApprovalScreen = () => {
 
   return (
     <div style={styles.container}>
-      <div style={styles.contentSection}>
-        <div style={styles.header}>
-          <h1 style={styles.title}>UDH Tiger Submission Approval</h1>
-          <p style={styles.subTitle}>List of all claim submissions pending for UDH Tiger approval</p>
-        </div>
+      <div style={styles.header}>
+        <h1 style={styles.title}>UDH Tiger Submission Approval</h1>
+        <p style={styles.subTitle}>List of all claim submissions pending for UDH Tiger approval</p>
+      </div>
 
-        <div style={styles.filters}>
-          <div style={styles.filterItem}>
-            <Input
-              placeholder="Claim ID"
-              value={filters.claimId}
-              onChange={(e) => setFilters({ ...filters, claimId: e.target.value })}
-              style={styles.input}
-            />
-          </div>
-          <div style={styles.filterItem}>
-            <Input
-              placeholder="Warehouse ID"
-              value={filters.warehouseId}
-              onChange={(e) => setFilters({ ...filters, warehouseId: e.target.value })}
-              style={styles.input}
-            />
-          </div>
-          <div style={styles.filterItem}>
-            <DatePicker
-              placeholder="Select Month"
-              picker="month"
-              value={filters.month}
-              onChange={(date) => setFilters({ ...filters, month: date })}
-              style={styles.input}
-            />
-          </div>
-          <div style={styles.filterActions}>
-            <Button type="primary" onClick={handleApplyFilters}>
-              Apply
-            </Button>
-            <Button type="link" onClick={handleResetFilters}>
-              Reset
-            </Button>
-          </div>
-        </div>
-
-        <Table
-          columns={columns}
-          dataSource={data}
-          rowKey="entity_id"
-          loading={loading}
-          pagination={false}
-          scroll={{ x: 1200 }}
-          bordered
-        />
-
-        <div style={{ marginTop: '24px', display: 'flex', justifyContent: 'flex-end' }}>
-          <Pagination
-            current={pagination.current}
-            pageSize={pagination.pageSize}
-            total={pagination.total}
-            onChange={(page) => fetchApprovals(page)}
-            showSizeChanger={false}
-            showTotal={(total) => `Total ${total} items`}
+      <div style={styles.filters}>
+        <div style={styles.filterItem}>
+          <Input
+            placeholder="Claim ID"
+            value={filters.claimId}
+            onChange={(e) => setFilters({ ...filters, claimId: e.target.value })}
+            style={styles.input}
           />
         </div>
+        <div style={styles.filterItem}>
+          <Input
+            placeholder="Warehouse ID"
+            value={filters.warehouseId}
+            onChange={(e) => setFilters({ ...filters, warehouseId: e.target.value })}
+            style={styles.input}
+          />
+        </div>
+        <div style={styles.filterItem}>
+          <DatePicker
+            placeholder="Select Month"
+            picker="month"
+            value={filters.month}
+            onChange={(date) => setFilters({ ...filters, month: date })}
+            style={styles.input}
+          />
+        </div>
+        <div style={styles.filterActions}>
+          <Button type="primary" onClick={handleApplyFilters}>
+            Apply
+          </Button>
+          <Button type="link" onClick={handleResetFilters}>
+            Reset
+          </Button>
+        </div>
+      </div>
+
+      <Table
+        columns={columns}
+        dataSource={data}
+        rowKey="entity_id"
+        loading={loading}
+        pagination={false}
+        scroll={{ x: 1200 }}
+        bordered
+      />
+
+      <div style={{ marginTop: '24px', display: 'flex', justifyContent: 'flex-end' }}>
+        <Pagination
+          current={pagination.current}
+          pageSize={pagination.pageSize}
+          total={pagination.total}
+          onChange={(page) => fetchApprovals(page)}
+          showSizeChanger={false}
+          showTotal={(total) => `Total ${total} items`}
+        />
       </div>
     </div>
   );
