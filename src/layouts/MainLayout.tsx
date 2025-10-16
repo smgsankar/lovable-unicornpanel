@@ -101,6 +101,16 @@ const MainLayout = ({ children }: MainLayoutProps) => {
           label: 'Claim Submission',
           path: '/fmcgclaimmodule/claimsubmissionlist',
         },
+        {
+          key: 'fmcgclaimmodule-romsubmissionapproval',
+          label: 'ROM Submission Approval',
+          path: '/fmcgclaimmodule/romsubmissionapproval',
+        },
+        {
+          key: 'fmcgclaimmodule-udhtigersubmissionapproval',
+          label: 'UDH Tiger Submission Approval',
+          path: '/fmcgclaimmodule/udhtigersubmissionapproval',
+        },
       ],
     },
   ];

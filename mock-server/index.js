@@ -215,6 +215,79 @@ app.get('/sc3_admin/get_gcs_download_url', async (_, res) => {
   }
 });
 
+// ==================== APPROVAL APIs ====================
+
+// Approval entity index (POST method for list API)
+app.post('/approval_service/approval_entity/index', async (req, res) => {
+  try {
+    const { page = 1, per_page = 20, entity_uuid, entity_type, data_filters = {} } = req.body;
+
+    const mockData = [
+      {
+        entity_id: '1',
+        entity_uuid: '123',
+        entity_type: 'UdhFmcgClaimEntity',
+        entity_status: 'ROM Approval Pending',
+        created_at: '2023-02-15T10:00:00Z',
+        creator_uuid: '987',
+        allowed_actions: ['Approve', 'Reject'],
+        extra_details: {
+          start_date: '2023-01-01',
+          end_date: '2023-01-31',
+          warehouse_id: '101',
+          warehouse_name: 'Warehouse A',
+          claim_used_amount: '5000',
+          anchor_claim_amount: '7000',
+          mismatch_amount: '2000',
+        },
+      },
+      {
+        entity_id: '2',
+        entity_uuid: '124',
+        entity_type: 'UdhFmcgClaimEntity',
+        entity_status: 'UDH Tiger Approval Pending',
+        created_at: '2023-02-16T11:00:00Z',
+        creator_uuid: '988',
+        allowed_actions: ['Approve', 'Reject'],
+        extra_details: {
+          start_date: '2023-01-01',
+          end_date: '2023-01-31',
+          warehouse_id: '102',
+          warehouse_name: 'Warehouse B',
+          claim_used_amount: '6000',
+          anchor_claim_amount: '8500',
+          mismatch_amount: '2500',
+        },
+      },
+    ];
+
+    let filteredData = mockData;
+
+    // Apply filters
+    if (entity_uuid) {
+      filteredData = filteredData.filter((item) => item.entity_uuid === entity_uuid);
+    }
+    if (data_filters.warehouse_id) {
+      filteredData = filteredData.filter(
+        (item) => item.extra_details.warehouse_id === data_filters.warehouse_id
+      );
+    }
+    if (data_filters.claim_month) {
+      filteredData = filteredData.filter(
+        (item) => item.extra_details.start_date.startsWith(data_filters.claim_month.substring(0, 7))
+      );
+    }
+
+    res.json({
+      status: 200,
+      message: 'fetched successfully',
+      data: filteredData,
+    });
+  } catch (error) {
+    res.status(500).json({ status: 500, message: error.message });
+  }
+});
+
 // Health check
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', message: 'Server is running' });
@@ -229,5 +302,6 @@ app.listen(PORT, () => {
   console.log(`   - POST /sc3_admin/sellers/:id`);
   console.log(`   - GET /sc3_admin/get_gcs_upload_url`);
   console.log(`   - GET /sc3_admin/get_gcs_download_url`);
+  console.log(`   - POST /approval_service/approval_entity/index`);
   console.log(`   - GET  /health`);
 });

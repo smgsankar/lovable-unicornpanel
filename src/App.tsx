@@ -12,6 +12,8 @@ import {
   ClaimSubmissionListScreen,
   ClaimSubmissionFormScreen,
   ClaimSubmissionViewScreen,
+  RomSubmissionApprovalScreen,
+  UdhTigerSubmissionApprovalScreen,
 } from "./modules/fmcgclaimmodule";
 import NotFound from "./pages/NotFound";
 import "./App.css";
@@ -233,6 +235,16 @@ const App = () => {
               exact
               path="/fmcgclaimmodule/claimsubmissionview"
               component={ClaimSubmissionViewScreen}
+            />
+            <Route
+              exact
+              path="/fmcgclaimmodule/romsubmissionapproval"
+              component={RomSubmissionApprovalScreen}
+            />
+            <Route
+              exact
+              path="/fmcgclaimmodule/udhtigersubmissionapproval"
+              component={UdhTigerSubmissionApprovalScreen}
             />
             <Route path="*" component={NotFound} />
           </Switch>
