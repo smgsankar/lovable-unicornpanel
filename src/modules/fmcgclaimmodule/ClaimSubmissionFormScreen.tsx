@@ -260,7 +260,7 @@ const ClaimSubmissionFormScreen = () => {
       );
 
       message.success(response.message);
-      history.push('/fmcgclaimmodule/claimsubmissionlist');
+      history.push('claimsubmissionlist');
     } catch (error: any) {
       console.error('Error submitting claim:', error);
       message.error(error.message || 'Failed to submit claim');
@@ -280,7 +280,7 @@ const ClaimSubmissionFormScreen = () => {
       <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
         <Button 
           icon={<ArrowLeft size={20} />} 
-          onClick={() => history.push('/fmcgclaimmodule/claimsubmissionlist')}
+          onClick={() => history.goBack()}
           type="text"
         />
         <h1 style={{ ...styles.heading, margin: 0 }}>
@@ -371,7 +371,7 @@ const ClaimSubmissionFormScreen = () => {
         <Button type="primary" onClick={handleSubmit} loading={uploading}>
           {isEditMode ? 'Confirm' : 'Create'}
         </Button>
-        <Button onClick={() => history.push('/fmcgclaimmodule/claimsubmissionlist')}>
+        <Button onClick={() => history.push('claimsubmissionlist')}>
           Cancel
         </Button>
       </div>

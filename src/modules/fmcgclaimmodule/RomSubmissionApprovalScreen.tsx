@@ -227,7 +227,7 @@ const RomSubmissionApprovalScreen = () => {
         <Button
           type="link"
           onClick={() => {
-            history.push(`/fmcgclaimmodule/claimsubmissionview?id=${record.entity_uuid}`);
+            history.push(`claimsubmissionview?id=${record.entity_uuid}`);
           }}
         >
           View

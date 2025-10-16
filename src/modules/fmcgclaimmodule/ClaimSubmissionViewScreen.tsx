@@ -167,7 +167,7 @@ const ClaimSubmissionViewScreen = () => {
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
           <Button 
             icon={<ArrowLeft size={20} />} 
-            onClick={() => history.push('/fmcgclaimmodule/claimsubmissionlist')}
+            onClick={() => history.goBack()}
             type="text"
           />
           <h1 style={{ ...styles.heading, margin: 0 }}>View Claim - {claimData.id}</h1>

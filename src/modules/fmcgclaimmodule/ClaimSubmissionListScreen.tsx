@@ -269,14 +269,14 @@ const ClaimSubmissionListScreen = () => {
         
         if (isRejected) {
           return (
-            <Button type="link" onClick={() => history.push(`/fmcgclaimmodule/claimsubmissionedit?id=${record.id}`)}>
+            <Button type="link" onClick={() => history.push(`claimsubmissionedit?id=${record.id}`)}>
               Resubmit
             </Button>
           );
         }
         
         return (
-          <Button type="link" onClick={() => history.push(`/fmcgclaimmodule/claimsubmissionview?id=${record.id}`)}>
+          <Button type="link" onClick={() => history.push(`claimsubmissionview?id=${record.id}`)}>
             View
           </Button>
         );
@@ -291,7 +291,7 @@ const ClaimSubmissionListScreen = () => {
           <h1 style={styles.heading}>Claim Submission List</h1>
           <p style={styles.subHeading}>List of all claim submissions</p>
         </div>
-        <Button type="primary" onClick={() => history.push('/fmcgclaimmodule/claimsubmissioncreate')}>
+        <Button type="primary" onClick={() => history.push('claimsubmissioncreate')}>
           Create Claim Submission
         </Button>
       </div>
