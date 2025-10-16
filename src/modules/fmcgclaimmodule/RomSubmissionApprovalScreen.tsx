@@ -269,14 +269,14 @@ const RomSubmissionApprovalScreen = () => {
             style={styles.input}
           />
         </div>
-        <div style={styles.filterActions}>
-          <Button type="primary" onClick={handleApplyFilters}>
-            Apply
-          </Button>
-          <Button type="link" onClick={handleResetFilters}>
-            Reset
-          </Button>
-        </div>
+          <div style={styles.filterActions}>
+            <Button type="link" onClick={handleApplyFilters}>
+              Apply
+            </Button>
+            <Button type="link" onClick={handleResetFilters}>
+              Reset
+            </Button>
+          </div>
       </div>
 
       <Table
