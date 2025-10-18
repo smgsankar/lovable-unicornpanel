@@ -26,7 +26,7 @@ interface ApprovalEntity {
 }
 
 interface ListResponse {
-  status: number;
+  status: string;
   message: string;
   data: ApprovalEntity[];
 }
@@ -114,7 +114,7 @@ const RomSubmissionApprovalScreen = () => {
           body: payload,
         },
         {
-          status: 200,
+          status: '200',
           message: 'fetched successfully',
           data: [
             {

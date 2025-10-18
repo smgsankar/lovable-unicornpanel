@@ -26,7 +26,7 @@ interface ApprovalEntity {
 }
 
 interface ListResponse {
-  status: number;
+  status: string;
   message: string;
   data: ApprovalEntity[];
 }
@@ -117,7 +117,7 @@ const UdhTigerSubmissionApprovalScreen = () => {
           body: payload,
         },
         {
-          status: 200,
+          status: '200',
           message: 'fetched successfully',
           data: [
             {
@@ -204,14 +204,14 @@ const UdhTigerSubmissionApprovalScreen = () => {
         notes: values.mismatch_reason || '',
       };
 
-      const response = await apiFetch(
+      const response = await apiFetch<{ status: string; is_error: boolean; message: string }>(
         '/approval_service/approval_entity/bulk_upsert_entity_action',
         {
           method: 'POST',
           body: payload,
         },
         {
-          status: 200,
+          status: '200',
           is_error: false,
           message: 'Bulk approval successful',
         }
