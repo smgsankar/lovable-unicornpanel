@@ -8,6 +8,7 @@ import dayjs from "dayjs";
 interface ClaimData {
   id: number;
   warehouse_id: number;
+  warehouse_name: string;
   discount_start_date: string;
   discount_end_date: string;
   claim_amount: number;
@@ -144,6 +145,7 @@ const ClaimSubmissionViewScreen = () => {
           data: {
             id: 456,
             warehouse_id: 123,
+            warehouse_name: "Dhaka Central Warehouse",
             discount_start_date: "2024-01-01",
             discount_end_date: "2024-01-31",
             claim_amount: 15000.5,
@@ -350,7 +352,7 @@ const ClaimSubmissionViewScreen = () => {
 
           <div style={styles.fieldRow}>
             <div style={styles.fieldLabel}>DB Name</div>
-            <div style={styles.fieldValue}>-</div>
+            <div style={styles.fieldValue}>{claimData.warehouse_name}</div>
           </div>
 
           <div style={styles.fieldRow}>
