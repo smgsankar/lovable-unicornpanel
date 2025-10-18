@@ -17,6 +17,8 @@ interface ClaimSubmission {
   discount_start_date: string;
   discount_end_date: string;
   claim_amount: number;
+  claim_realized_amount: number;
+  claim_due_amount: number;
   order_claim_amount: number;
   order_damaged_amount: number;
   supporting_documents: string;
@@ -124,6 +126,8 @@ const ClaimSubmissionListScreen = () => {
               discount_start_date: '2024-01-01',
               discount_end_date: '2024-01-31',
               claim_amount: 15000.50,
+              claim_realized_amount: 10000.50,
+              claim_due_amount: 5000.00,
               order_claim_amount: 30000,
               order_damaged_amount: 0,
               supporting_documents: '/claim-docs.pdf',
@@ -140,6 +144,8 @@ const ClaimSubmissionListScreen = () => {
               discount_start_date: '2024-02-01',
               discount_end_date: '2024-02-28',
               claim_amount: 25000.00,
+              claim_realized_amount: 25000.00,
+              claim_due_amount: 0.00,
               order_claim_amount: 28000,
               order_damaged_amount: 1500,
               supporting_documents: '/claim-docs-457.pdf',
@@ -153,6 +159,8 @@ const ClaimSubmissionListScreen = () => {
               discount_start_date: '2024-03-01',
               discount_end_date: '2024-03-31',
               claim_amount: 18000.00,
+              claim_realized_amount: 8000.00,
+              claim_due_amount: 10000.00,
               order_claim_amount: 18000,
               order_damaged_amount: 0,
               supporting_documents: '/claim-docs-458.pdf',
@@ -239,13 +247,15 @@ const ClaimSubmissionListScreen = () => {
     },
     {
       title: 'Claim Realized Amount',
+      dataIndex: 'claim_realized_amount',
       key: 'claim_realized_amount',
-      render: () => '-',
+      render: (amount: number) => <span>৳{amount.toFixed(2)}</span>,
     },
     {
       title: 'Claim Due Amount',
+      dataIndex: 'claim_due_amount',
       key: 'claim_due_amount',
-      render: () => '-',
+      render: (amount: number) => <span>৳{amount.toFixed(2)}</span>,
     },
     {
       title: 'Realization ID(s)',
