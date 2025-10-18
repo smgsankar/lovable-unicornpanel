@@ -84,6 +84,7 @@ const styles: Record<string, React.CSSProperties> = {
   fieldRow: {
     display: "flex",
     marginBottom: "16px",
+    alignItems: "flex-start",
   },
   fieldLabel: {
     width: "250px",
