@@ -346,7 +346,7 @@ const UdhTigerSubmissionApprovalScreen = () => {
       </div>
 
       {selectedRowKeys.length > 0 && (
-        <div style={{ marginBottom: '16px' }}>
+        <div style={{ marginBottom: '16px', display: 'flex', justifyContent: 'flex-end' }}>
           <Button type="primary" onClick={handleBulkApprove}>
             Approve ({selectedRowKeys.length})
           </Button>
