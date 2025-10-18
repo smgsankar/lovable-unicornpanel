@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Table, Input, Button, DatePicker, Pagination } from 'antd';
+import { Table, Input, Button, DatePicker, Pagination, Modal, Form, message } from 'antd';
 import { useHistory } from 'react-router-dom';
 import dayjs, { Dayjs } from 'dayjs';
 import { fetch as apiFetch } from '@/apiClient';
@@ -84,6 +84,9 @@ const UdhTigerSubmissionApprovalScreen = () => {
     warehouseId: '',
     month: null as Dayjs | null,
   });
+  const [selectedRowKeys, setSelectedRowKeys] = useState<string[]>([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [form] = Form.useForm();
 
   const history = useHistory();
 
@@ -167,6 +170,69 @@ const UdhTigerSubmissionApprovalScreen = () => {
       month: null,
     });
     setTimeout(() => fetchApprovals(1), 0);
+  };
+
+  const selectedEntities = data.filter((item) =>
+    selectedRowKeys.includes(item.entity_id)
+  );
+
+  const totalClaimAmount = selectedEntities.reduce(
+    (sum, item) => sum + parseFloat(item.extra_details.claim_used_amount || '0'),
+    0
+  );
+
+  const totalAnchorAmount = selectedEntities.reduce(
+    (sum, item) => sum + parseFloat(item.extra_details.anchor_claim_amount || '0'),
+    0
+  );
+
+  const mismatchAmount = Math.abs(totalClaimAmount - totalAnchorAmount);
+  const hasMismatch = totalClaimAmount !== totalAnchorAmount;
+
+  const handleBulkApprove = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleModalOk = async () => {
+    try {
+      const values = await form.validateFields();
+      setLoading(true);
+
+      const payload = {
+        entity_ids: selectedRowKeys,
+        user_action: 'Approve',
+        notes: values.mismatch_reason || '',
+      };
+
+      const response = await apiFetch(
+        '/approval_service/approval_entity/bulk_upsert_entity_action',
+        {
+          method: 'POST',
+          body: payload,
+        },
+        {
+          status: 200,
+          is_error: false,
+          message: 'Bulk approval successful',
+        }
+      );
+
+      message.success(response.message);
+      setIsModalVisible(false);
+      form.resetFields();
+      setSelectedRowKeys([]);
+      fetchApprovals(pagination.current);
+    } catch (error: any) {
+      console.error('Error bulk approving:', error);
+      message.error(error.message || 'Failed to bulk approve');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleModalCancel = () => {
+    setIsModalVisible(false);
+    form.resetFields();
   };
 
   const columns = [
@@ -279,6 +345,14 @@ const UdhTigerSubmissionApprovalScreen = () => {
           </div>
       </div>
 
+      {selectedRowKeys.length > 0 && (
+        <div style={{ marginBottom: '16px' }}>
+          <Button type="primary" onClick={handleBulkApprove}>
+            Approve ({selectedRowKeys.length})
+          </Button>
+        </div>
+      )}
+
       <Table
         columns={columns}
         dataSource={data}
@@ -287,6 +361,10 @@ const UdhTigerSubmissionApprovalScreen = () => {
         pagination={false}
         scroll={{ x: 1200 }}
         bordered
+        rowSelection={{
+          selectedRowKeys,
+          onChange: (selectedKeys) => setSelectedRowKeys(selectedKeys as string[]),
+        }}
       />
 
       <div style={{ marginTop: '24px', display: 'flex', justifyContent: 'flex-end' }}>
@@ -299,6 +377,45 @@ const UdhTigerSubmissionApprovalScreen = () => {
           showTotal={(total) => `Total ${total} items`}
         />
       </div>
+
+      <Modal
+        title="Do you want to bulk approve these claims?"
+        open={isModalVisible}
+        onOk={handleModalOk}
+        onCancel={handleModalCancel}
+        okText="Yes, approve"
+        cancelText="Cancel"
+        confirmLoading={loading}
+      >
+        {hasMismatch && (
+          <p style={{ color: '#F94949', marginBottom: '16px' }}>
+            Gap of ৳{mismatchAmount.toFixed(2)} mismatched amount is present in the claim. You may
+            be penalised for the gap amount.
+          </p>
+        )}
+
+        <div style={{ marginBottom: '16px' }}>
+          <p style={{ marginBottom: '8px' }}>
+            <strong>Number of claims selected:</strong> {selectedRowKeys.length}
+          </p>
+          <p style={{ marginBottom: '8px' }}>
+            <strong>Total claim amount:</strong> ৳{totalClaimAmount.toFixed(2)}
+          </p>
+          <p style={{ marginBottom: '8px' }}>
+            <strong>Anchor claim amount:</strong> ৳{totalAnchorAmount.toFixed(2)}
+          </p>
+        </div>
+
+        <Form form={form} layout="vertical">
+          <Form.Item
+            label="Mismatch reason"
+            name="mismatch_reason"
+            rules={[{ required: hasMismatch, message: 'Please provide a mismatch reason' }]}
+          >
+            <Input.TextArea rows={3} placeholder="Enter reason for mismatch" />
+          </Form.Item>
+        </Form>
+      </Modal>
     </div>
   );
 };
