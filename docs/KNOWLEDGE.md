@@ -1,25 +1,25 @@
-This is an admin panel project, here the base layout has a collapsable side navbar with a logo and links to modules and sub modules.
+Admin Panel Specification
 
-The width of the sidebar should be 230px in expanded state. The logo should take up the full width of the sidebar while maintaining the aspect ratio (it should be atleast 3:1, if not prompt for a confirmation). The logo should be a link redirecting to the initial route (`/`). In collapsed state of sidebar, the logo should be hidden.
+This project is an admin panel application with a collapsible sidebar navigation layout. The sidebar includes a logo and links to modules and submodules. When expanded, the sidebar width should be 230px. The logo must occupy the full width of the sidebar while maintaining its aspect ratio (minimum 3:1). If not, prompt for confirmation. The logo should link to the initial route /, and it should be hidden when the sidebar is collapsed.
 
-In the sidebar, highlight the active module and/or its submodule with a small indicator to the left. For the initial route(`/`), it should open with the side bar and a blank screen, clicking on the links to modules and sub modules should open the relevant screens, if the link in not valid, it should show a 404 warning and a redirection link back to the initial route.
+In the sidebar, highlight the active module or submodule with a small indicator on the left. The initial route / should open with the sidebar visible and a blank screen. Clicking on a module or submodule should load its respective screen. Invalid links should display a 404 warning and a redirect link to /.
 
-The modules in side navbar should also be collapsable if it has more than 1 sub module, show collapsible sub modules only if the module has 2 or more sub modules, if it has 0 to 1 sub modules, clicking on the module itself should navigate to the relevant screen.
+Modules in the sidebar should be collapsible only if they have two or more submodules. If a module has zero or one submodule, clicking it should directly navigate to its screen. All routes must follow the pattern /<module_id>/<sub_module_id_or_screen_path> — exactly two segments with optional query parameters.
+All module IDs must end with the suffix module. For submodules, prefix their IDs with the module’s second segment. Submodule IDs do not require a suffix.
 
-The screen routes should always be in the format, `/<module_id>/<sub_module_id or path_to_screen>`
-for all the screens, the route should always have exactly 2 segments and 2 segments only with optional query parameters if needed. All the module IDs should have `module` as suffix. For sub modules, prefix the submodule ID with the second segment. Sub module IDs need not have any suffix.
+The user base is in Bangladesh. Currency values must be prefixed with the Taka symbol (৳). Phone number fields or values should be validated and formatted according to the Bangladeshi phone number format.
 
-The userbase for this panel will be based in Bangladesh, so the values representing money should be prefixed with the taka symbol (৳), and in case of phone number related fields/values format/validate them properly with the Bangladeshi phone number format.
+Use antd@5.17.2 for UI components and style using React inline styles (React.CSSProperties).
+Use react-router-dom@5.3.0 for routing and @types/react-router-dom@5.3.3 for types.
+Use useHistory and useLocation hooks for navigation.
+For back navigation, always use history.goBack().
+When using history.push(), only pass the second segment of the route (no leading slash).
 
-For UI components and styling, strictly use `antd@5.17.2` and react style object (`React.CSSProperties`).
-
-For navigation, strictly use `react-router-dom@5.3.0` and for its types use `@types/react-router-dom@5.3.3` and its useHistory and useLocation hooks, strictly use the versions mentioned above. Always use history.goBack() for back button click handlers. And when using history.push(), use only the second segment of the target route without any forward slash(`/`).
-
-Use `federation` plugin from `@module-federation/vite` to setup module federation with the following config,
+Use the @module-federation/vite plugin for module federation with the configuration below:
 
 ```js
 {
-  name: "lovableunicornpanel", // container app name here
+  name: "lovableunicornpanel",
   filename: "remoteModules.js",
   manifest: true,
   exposes: {},
@@ -28,78 +28,81 @@ Use `federation` plugin from `@module-federation/vite` to setup module federatio
     "react-dom": { singleton: true },
     "react-router-dom": { singleton: true },
     antd: { singleton: true },
-  }
-}
-```
-
-<!-- PS: Replace the colors with the appropriate theme colors -->
-
-use the following color scheme
-#1A1A1A - heading font color
-#4D4D4D - body font color
-#45469D - primary color
-#F6F6F6 - body background color
-#FFFFFF - section background color
-#E6E6E6 - secondary color
-#F94949 - error color
-
-<!-- PS: Replace the colors with the appropriate semantic colors -->
-
-for semantic chips/tags use the following colors
-success - #ebfbf4
-error - #fef4ef
-info - #f2f8fe
-warning - #fff7ec
-neutral - #333333
-
-In most cases, we will have 2 types of layouts
-
-- listing screen
-- action screen
-
-for listing screen layouts,
-the page header will have a heading, and can(optionally) have a sub heading and a primary action
-then, it will have a few filters with apply and reset buttons (link style)
-followed by a table showing the data, paginated normally 20 items per page
-
-for action screen layouts,
-in most cases, we would land in the action screen by clicking on some links from the respective listing screens
-the action screen will have a heading with a back icon button
-there are 2 primary types of action screen layouts - view details layout and form-based(create/edit forms) layouts
-both the layouts will have one or more sections and each section will have a title, content(based on the type of layout) and a divider separating the content from the title
-
-For folder structure, keep all the modules isolated at `src/modules/<module_id>`, create an `index.ts` file at the root of each module and export all the screen level components of that module from there.
-
-For all the modules, once completed coding, make sure that the `index.ts` files of every module is exposed in the module federation plugin as following,
-
-```js
-{
-  // ...other module federation configs
-  exposes: {
-    './<module_id_capitalized>Components': './src/modules/<module_id>/index.ts',
   },
 }
 ```
 
-For API calls, instead of using window.fetch, use fetch method defined in src/apiClient.ts
-that fetch method accepts mock response as the third parameter in addition to API route and request options, refer to the jsdoc in the same file for the method definition.
+Color scheme:
+Heading font: #1A1A1A
+Body font: #4D4D4D
+Primary: #45469D
+Body background: #F6F6F6
+Section background: #FFFFFF
+Secondary: #E6E6E6
+Error: #F94949
 
-Here, mock response for the fetch method is mandatory. So, for all the API integrations, if mock response is not given with the prompt, specifically ask for one
+Semantic tag colors:
+success: #ebfbf4
+error: #fef4ef
+info: #f2f8fe
+warning: #fff7ec
+neutral: #333333
 
-For file upload based fields, upon form submission, before calling the form submit related API, upload the relevant files in the form with the `uploadFileToGcs` method in `src/apiClient.ts` file and add the returned gcs path from the method to the submit API payload in the relevant key/field.
+There are two primary layout types:
 
-Similarly to download a file or opening a file in new tab, check if the API returns a file gcs path, if so get the signed URL for the file/resource with the help of `getGcsDownloadUrl` method in `src/apiClient.ts` file and then download the file from the URL or open the URL in the new tab whichever is needed.
+Listing Screen Layout
 
-For any API, if it requires `warehouse_id` in request params/payload, get the value from local storage (key - warehouse_id) and pass it as a number, if the value is not available pass 0
+The header contains a heading and can optionally include a subheading and a primary action button.
 
-For GET and POST API calls, if there is any error with the API, show proper error message as a Toast message to the user
-For POST API calls (or the ones involving any user action) alone, if the server responds with a message, show that to the user as a Toast message
+Filters appear below the header with Apply and Reset (link-style) buttons.
 
-For Toast message - use antd's message
-make the table components horizontally scrollable if needed
+The content section displays a paginated table (20 items per page).
 
-for form based screens, always have 2 columns unless specified
-and only for elements like multi file upload/text area take up 2 colspans
-for rest take up 1 colspan even for single file upload
+Action Screen Layout
 
-in case of multi file upload, add support for drag and drop for the supported file types
+Accessed by clicking links from listing screens.
+
+Includes a heading with a back icon button.
+
+Two main layout types:
+
+View Details layout
+
+Form-based (create/edit) layout
+
+Each layout consists of one or more sections with a title, content, and a divider.
+
+Folder structure:
+Each module should be located under src/modules/<module_id>.
+Each module must include an index.ts file exporting all screen-level components.
+Expose each module’s index file in the module federation config as:
+
+```js
+{
+  // ...other federation configs
+  exposes: {
+    "./<ModuleIdCapitalized>Components": "./src/modules/<module_id>/index.ts",
+  },
+}
+```
+
+For API integration, do not use window.fetch. Use the fetch method defined in src/apiClient.ts.
+This fetch method accepts three parameters: the API route, request options, and a required mock response. Always include a mock response. If a mock response is missing in the prompt, explicitly ask for one.
+
+For file upload fields:
+Before calling the form submission API, upload files using uploadFileToGcs from src/apiClient.ts.
+Add the returned GCS path to the API payload in the relevant key or field.
+
+For file downloads:
+
+If an API response includes a GCS file path, obtain a signed URL using getGcsDownloadUrl from src/apiClient.ts, and use it to either download the file or open it in a new tab.
+
+For any API that requires warehouse_id in the request, retrieve it from local storage (warehouse_id key). Pass it as a number, or 0 if unavailable.
+
+Error handling:
+For GET and POST APIs, show appropriate error messages using Ant Design’s message Toast.
+For POST (or user-action) APIs, if the server returns a message, display it to the user as a Toast.
+
+For tables, enable horizontal scrolling when needed.
+For form-based screens, use two columns unless otherwise specified. Only components like multi-file upload or text area should span two columns; all others should occupy one column, including single file uploads.
+For multi-file uploads, support drag and drop for supported file types.

@@ -1,38 +1,26 @@
-Build a new module with the following instructions,
+Build a new module named Sellers (udhsellermodule) with 3 screens: List, Create/Edit, and View. There are no submodules.
 
-<!-- Basic module details -->
-Module ID - udhsellermodule
-Module name - Sellers
+1. Seller Listing Screen
+   Heading: “Sellers”
+   Subheading: “List of all sellers associated to the warehouse”
+   Actions: “Create Seller” → navigates to create screen
+   Filters:
 
-This module doesn't have any sub modules but it has 3 screens,
+Seller ID (numeric input)
+Seller Name (text input)
+Shop Name (text input)
+Phone (numeric input, Bangladesh phone format)
 
-<!-- Elaborating screen level information -->
-the first one is listing screen,
-heading - Sellers
-sub heading - List of all sellers associated to the warehouse
-actions - Create Seller(redirect to create screen)
+Table columns: Seller ID, Seller Name, Shop Name, Shop Address, Phone, Actions (Edit → navigates to edit screen with ID param)
+Pagination: default page size = 20
 
-filters - seller id(numeric input), seller name(text input), shop name(text input), phone(numeric input - bangladesh phone number format)
+List API
+Route: /sc3_admin/sellers/list
+Method: GET
+Query params: id, name, shop_name, phone, page, per_page, warehouse_id
+Mock response:
 
-then we have the table, which has the following columns,
-Seller ID
-Seller Name
-Shop Name
-Shop address
-Phone
-Actions - Edit(should redirect to create screen with ID param)
-
-and finally, pagination with 20 as default page size
-
-<!-- Sharing API contract with mock response -->
-for the list API,
-route - /sc3_admin/sellers/list
-method - GET
-allowed query params - id, name, shop_name, phone, page, per_page, warehouse_id
-
-mock response:
-
-```
+```json
 {
   "success": true,
   "message": "fetched successfully",
@@ -55,20 +43,20 @@ mock response:
 }
 ```
 
-now, for the create/edit screens - reuse the same component under 2 routes - create and edit
+2. Create/Edit Seller Screen
+   Use the same form component for both routes.
 
-for Edit screen,
-heading - Edit seller - <seller ID>
-the edit one will have a query parameter id which will take the seller id which needs to be edited
+Create screen heading: “Create Seller”
 
-API for getting individual seller data
-route - /sc3_admin/sellers/<id>
-method - GET
-allowed query params - warehouse_id
+Edit screen heading: “Edit Seller – <seller ID>” (takes seller id as query param)
 
-mock response:
+Fetch single seller API
+Route: /sc3_admin/sellers/<id>
+Method: GET
+Allowed query params: warehouse_id
+Mock response:
 
-```
+```json
 {
   "success": true,
   "message": "fetched successfully",
@@ -83,21 +71,16 @@ mock response:
 }
 ```
 
-now for the create form,
-heading - Create Seller
-we have 2 sections - Seller details, Supporting documents
+Form sections:
+Seller Details: Seller Name (text, max 80 chars), Shop Name (text, max 150 chars), Phone (numeric, Bangladesh format), Shop Address (textarea, max 3 lines)
+Supporting Documents: Verification Document (single file upload, image or PDF)
 
-in seller details section, we will have the following fields
-Seller Name(text input - max 80 characters), Shop Name(text input - max 150 characters), Phone(numeric input - bangladesh phone number format), Shop Address(text area input - max 3 lines)
+Create Seller API
+Route: /sc3_admin/sellers/create
+Method: POST
+Payload:
 
-in Supporting documents section, we'll have a file upload for Verification document - it'll only accept 1 file of any image format or pdf
-
-for form submission APIs, in case of create seller,
-route - /sc3_admin/sellers/create
-method - POST
-expected payload format:
-
-```
+```json
 {
   "name": "Seller ABC",
   "shop_name": "Shop ABC",
@@ -107,9 +90,9 @@ expected payload format:
 }
 ```
 
-mock response:
+Response:
 
-```
+```json
 {
   "success": true,
   "message": "Seller created successfully",
@@ -117,12 +100,12 @@ mock response:
 }
 ```
 
-in case of edit seller,
-route - /sc3_admin/sellers/<id>
-method - POST
-expected payload format:
+Edit Seller API
+Route: /sc3_admin/sellers/<id>
+Method: POST
+Payload:
 
-```
+```json
 {
   "id": 12345,
   "name": "Seller ABC",
@@ -133,26 +116,27 @@ expected payload format:
 }
 ```
 
-mock response:
+Response:
 
-```
+```json
 {
   "success": true,
   "message": "Seller edited successfully"
 }
 ```
 
-for document upload using `uploadFileToGcs` pass the following as options,
-route - /sc3_admin/get_gcs_upload_url
-```
+File Upload API (used by uploadFileToGcs)
+Route: /sc3_admin/get_gcs_upload_url
+Payload:
+
+```json
 {
   "file_extension": "<file_extension>",
-  "file_type": "SellerVerificationDocument",
+  "file_type": "SellerVerificationDocument"
 }
 ```
 
-finally, for view screen,
-heading - View seller - <seller ID>
-show the data from the seller information GET API in a single section `Seller details`
-
-for verification document, on click, get the signed URL from `getGcsDownloadUrl` method with route - /sc3_admin/get_gcs_upload_url and open in a new tab
+3. View Seller Screen
+   Heading: “View Seller – <seller ID>”
+   Displays seller details from the single-seller GET API in one section.
+   For verification document, clicking it should fetch a signed URL via getGcsDownloadUrl (same route /sc3_admin/get_gcs_upload_url) and open in a new tab.
