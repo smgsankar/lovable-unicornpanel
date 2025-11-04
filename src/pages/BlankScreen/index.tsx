@@ -24,7 +24,7 @@ const BlankScreen = () => {
   return (
     <div style={styles.container}>
       <div style={styles.content}>
-        <h2 style={styles.heading}>Welcome</h2>
+        <h2 style={styles.heading}>Welcome!</h2>
         <p style={styles.text}>Select a module from the sidebar to get started</p>
       </div>
     </div>
